@@ -11,6 +11,8 @@
 </head>
 
 <body class="mdui-appbar-with-toolbar mdui-theme-accent-orange mdui-theme-layout-auto">
+
+    <!-- mdui工具栏 -->
     <div class="mdui-appbar mdui-appbar-fixed">
         <div class="mdui-toolbar mdui-color-theme">
             <a href="javascript:;" mdui-drawer="{target: '#drawer'}" class="mdui-btn mdui-btn-icon">
@@ -19,16 +21,22 @@
             <a href="javascript:;" class="mdui-typo-headline">Self Study Kit</a>
             <a href="javascript:;" class="mdui-typo-title">首页</a>
             <div class="mdui-toolbar-spacer"></div>
-            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
-                <i class="mdui-icon material-icons">refresh</i>
-            </a>
-            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+            
+            <botton href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#right-menu'}">
                 <i class="mdui-icon material-icons">more_vert</i>
-            </a>
+            </botton>
+            <ul class="mdui-menu" id="right-menu">
+                <li class="mdui-menu-item">
+                    <a href="javascript:;" class="mdui-ripple" id="theme-changer">
+                        <i class="mdui-menu-item-icon mdui-icon material-icons" id="theme-changer-icon">brightness_auto</i><span>切换主题颜色</span>
+                    </a>
+                </li>
+                
+            </ul>
         </div>
-
     </div>
 
+    <!-- mdui侧边栏 -->
     <div class="mdui-drawer mdui-shadow-6 mdui-drawer-close" id="drawer">
         <div class="mdui-list">
             <a class="mdui-list-item mdui-ripple" id="link-index">
@@ -39,44 +47,48 @@
                 <i class="mdui-list-item-icon mdui-icon material-icons">star</i>
                 <div class="mdui-list-item-content">欢迎使用</div>
             </a>
-            <div class="mdui-subheader">Subheader</div>
-            <a class="mdui-list-item mdui-ripple">
-                <i class="mdui-list-item-icon mdui-icon material-icons">email</i>
-                <div class="mdui-list-item-content">All mail</div>
+            <div class="mdui-subheader">时间管理</div>
+            <a class="mdui-list-item mdui-ripple" id="link-clock">
+                <i class="mdui-list-item-icon mdui-icon material-icons">access_time</i>
+                <div class="mdui-list-item-content">时钟</div>
             </a>
-            <a class="mdui-list-item mdui-ripple">
-                <i class="mdui-list-item-icon mdui-icon material-icons">delete</i>
-                <div class="mdui-list-item-content">Trash</div>
+            <a class="mdui-list-item mdui-ripple" id="link-pomodoro-timer">
+                <i class="mdui-list-item-icon mdui-icon material-icons">timer</i>
+                <div class="mdui-list-item-content">番茄钟</div>
             </a>
-            <a class="mdui-list-item mdui-ripple">
-                <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
-                <div class="mdui-list-item-content">Spam</div>
+            <a class="mdui-list-item mdui-ripple" id="link-word-notepad">
+                <i class="mdui-list-item-icon mdui-icon material-icons">book</i>
+                <div class="mdui-list-item-content">单词本</div>
             </a>
         </div>
     </div>
 
-    <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 目的是实现页面切换 -->
+    <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 用于实现页面切换 -->
     <div class="mdui-tab" mdui-tab style="display: none;" id="page-changer">
-        <a href="#page-index" class="mdui-ripple"></a>
-        <a href="#page-welcome" class="mdui-ripple"></a>
-        <a href="#example1-tab3" class="mdui-ripple"></a>
+        <a href="#page-index"></a>
+        <a href="#page-welcome"></a>
+        <a href="#example1-tab3"></a>
     </div>
 
     <!-- 首页 -->
     <div id="page-index" class="mdui-p-a-2">
         <div class="text-center">
             <div style="font-size: 500%;">自律</div>
-            <div style="font-size: 300%;opacity:0.5">" 君子曰：学不可以已。"</div>
+            <div style="font-size: 200%;opacity:0.5" id="yiyan"><br></div>
         </div>
     </div>
 
     <!-- 欢迎使用 -->
-    <div id="page-welcome" class="mdui-p-a-2">Welcome!</div>
+    <div id="page-welcome" class="mdui-p-a-2">
+        <h1>欢迎使用 Self Study Kit !</h1>
+        <div>Self Study Kit 是一个基于H5的自习辅助工具集. </div>
+    </div>
+
+
     <div id="example1-tab3" class="mdui-p-a-2">shopping content</div>
 
-
-
     <script src="./node_modules/mdui/dist/js/mdui.min.js"></script>
+    <script type="module" src="./js/yiyan.js"></script>
     <script src="./js/main.js"></script>
 </body>
 
