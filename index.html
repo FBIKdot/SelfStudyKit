@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./node_modules/mdui/dist/css/mdui.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Self Study Kit</title>
+</head>
+
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-orange mdui-theme-layout-auto">
+    <div class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-color-theme">
+            <a href="javascript:;" mdui-drawer="{target: '#drawer'}" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">menu</i>
+            </a>
+            <a href="javascript:;" class="mdui-typo-headline">Self Study Kit</a>
+            <a href="javascript:;" class="mdui-typo-title">首页</a>
+            <div class="mdui-toolbar-spacer"></div>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">refresh</i>
+            </a>
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">more_vert</i>
+            </a>
+        </div>
+
+    </div>
+
+    <div class="mdui-drawer mdui-shadow-6 mdui-drawer-close" id="drawer">
+        <div class="mdui-list">
+            <a class="mdui-list-item mdui-ripple" id="link-index">
+                <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+                <div class="mdui-list-item-content">首页</div>
+            </a>
+            <a class="mdui-list-item mdui-ripple" id="link-welcome">
+                <i class="mdui-list-item-icon mdui-icon material-icons">star</i>
+                <div class="mdui-list-item-content">欢迎使用</div>
+            </a>
+            <div class="mdui-subheader">Subheader</div>
+            <a class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">email</i>
+                <div class="mdui-list-item-content">All mail</div>
+            </a>
+            <a class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">delete</i>
+                <div class="mdui-list-item-content">Trash</div>
+            </a>
+            <a class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+                <div class="mdui-list-item-content">Spam</div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 目的是实现页面切换 -->
+    <div class="mdui-tab" mdui-tab style="display: none;" id="page-changer">
+        <a href="#page-index" class="mdui-ripple"></a>
+        <a href="#page-welcome" class="mdui-ripple"></a>
+        <a href="#example1-tab3" class="mdui-ripple"></a>
+    </div>
+
+    <!-- 首页 -->
+    <div id="page-index" class="mdui-p-a-2">
+        <div class="text-center">
+            <div style="font-size: 500%;">自律</div>
+            <div style="font-size: 300%;opacity:0.5">" 君子曰：学不可以已。"</div>
+        </div>
+    </div>
+
+    <!-- 欢迎使用 -->
+    <div id="page-welcome" class="mdui-p-a-2">Welcome!</div>
+    <div id="example1-tab3" class="mdui-p-a-2">shopping content</div>
+
+
+
+    <script src="./node_modules/mdui/dist/js/mdui.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+
+</html>
