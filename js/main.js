@@ -44,3 +44,13 @@ page.name.forEach((element, index) => {
     $('#link-' + element).on('click', () => page.changer.show(index));
 });
 
+// 悬浮按钮 lab-wapper 逻辑
+$('#page-changer').on('change.mdui.tab', event => {
+    switch (event._detail.index) {
+        case 1:
+            page.lab.show();
+            break;
+        default:
+            page.lab.hide();
+    };
+})
