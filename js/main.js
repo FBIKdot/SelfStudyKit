@@ -2,6 +2,13 @@ console.log('made by FBIK.');
 
 let $ = mdui.$;
 
+// 页面内容配置
+let page = {
+    name: ['index', 'welcome'],
+    changer: new mdui.Tab('#page-changer'),
+    lab: new mdui.Fab('#fab-wrapper')
+}
+
 // 随机整数生成器
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -33,8 +40,7 @@ fetch('./js/json/yiyan.json')
 
 
 /* 使用js调用mdui tab选项卡, 实现页面切换 */
-let page = ['index', 'welcome']
-page.forEach((element, index) => {
-    $('#link-' + element).on('click', () => new mdui.Tab('#page-changer').show(index));
+page.name.forEach((element, index) => {
+    $('#link-' + element).on('click', () => page.changer.show(index));
 });
 
