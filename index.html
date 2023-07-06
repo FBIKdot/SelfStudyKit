@@ -89,29 +89,26 @@
     <div id="example1-tab3" class="mdui-p-a-2">shopping content</div>
 
     <!-- 浮动操作按钮 -->
-    <div class="mdui-fab-wrapper" id="exampleFab">
+    <div class="mdui-fab-wrapper" id="fab-wrapper" mdui-fab="{trigger: 'hover'}">
         <button class="mdui-fab mdui-ripple mdui-color-theme-accent">
-          <!-- 默认显示的图标 -->
-          <i class="mdui-icon material-icons">add</i>
-      
-          <!-- 在拨号菜单开始打开时，平滑切换到该图标，若不需要切换图标，则可以省略该元素 -->
-          <i class="mdui-icon mdui-fab-opened material-icons">close</i>
+            <i class="mdui-icon material-icons">add</i>
+            <i class="mdui-icon mdui-fab-opened material-icons">close</i>
         </button>
         <div class="mdui-fab-dial">
-          <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink">
-            <i class="mdui-icon material-icons">backup</i>
-          </button>
-          <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red">
-            <i class="mdui-icon material-icons">bookmark</i>
-          </button>
-          <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange">
-            <i class="mdui-icon material-icons">access_alarms</i>
-          </button>
-          <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue">
-            <i class="mdui-icon material-icons">touch_app</i>
-          </button>
+            <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink">
+                <i class="mdui-icon material-icons">backup</i>
+            </button>
+            <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-red">
+                <i class="mdui-icon material-icons">bookmark</i>
+            </button>
+            <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange">
+                <i class="mdui-icon material-icons">access_alarms</i>
+            </button>
+            <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue">
+                <i class="mdui-icon material-icons">touch_app</i>
+            </button>
         </div>
-      </div>
+    </div>
 
     <script src="./node_modules/mdui/dist/js/mdui.min.js"></script>
     <script type="module" src="./js/yiyan.js"></script>
