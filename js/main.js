@@ -52,7 +52,7 @@ page.name.forEach((element, index) => {
     $('#link-' + element).on('click', () => page.changer.show(index));
 });
 
-//* 悬浮按钮 mdui-fab 逻辑 起
+//* 悬浮按钮 fab-wrapper 逻辑 起
 $('#page-changer').on('change.mdui.tab', event => {
     switch (event._detail.index) {
         case 1:
@@ -63,8 +63,46 @@ $('#page-changer').on('change.mdui.tab', event => {
     };
 });
 
+/**
+ * @description 根据传入的参数更改 fab-wrapper 的外观与功能
+ * @param {Object} config - 一个包含以下属性的对象：
+ *   @param {string} close='add' - 选填, 关闭时的mdui-icon名字
+ *   @param {string} open='close' - 选填, 展开后的mdui-icon名字
+ *   @param {Array} dial - 一个数组，包含以下两个元素：
+ *     @param {string} dialIcon='touch_app' - 拨号的mdui-icon名字
+ *     @param {string} dialColor - 选填, 拨号图标的颜色, 不填就不会给这个按钮添加mdui-color-*类
+ *     @param {function} dialFn=function(){throw new Error("该拨号函数未定义");} - 拨号的函数
+ * @return {void} - 此函数没有返回值
+ */
+page.fn.fab_change = function ({
+    close: closeIcon = 'add',
+    open: openIcon = 'close',
+    dial = []
+}) {
+    dial = dial.map(([icon = 'touch_app', color, fn = function () { throw new Error("该拨号点击后执行的函数未定义"); }]) => [icon, color, fn]);
+    $('#fab-wrapper i').eq(0).text(closeIcon);
+    $('#fab-wrapper i').eq(1).text(openIcon);
+    $('#fab-dial').text('');
+    dial.forEach(([icon, color, fn], index) => {
+        $('#fab-dial').append(`<button class="mdui-fab mdui-fab-mini mdui-ripple ${'mdui-color-' + color || ''}"><i class="mdui-icon material-icons">${icon}</i></button>`)
+        $('#fab-dial button').eq(index).on('click', fn);
+    });
+    // console.log('page.fn.fab_change:', closeIcon, openIcon, dial);
+};
 
-//* 悬浮按钮 mdui-fab 逻辑 终
+// 测试用功能: 
+page.fn.fab_change({
+    close: 'add',
+    open: 'close',
+    dial: [
+        ['backup', 'pink'],
+        ['bookmark', 'red'],
+        ['access_alarms', 'orange'],
+        ['touch_app', 'blue', function () { console.log(`it's work!!!`); }]
+    ]
+});
+
+//* 悬浮按钮 fab-wrapper 逻辑 终
 
 /*
  * 核心功能 终
