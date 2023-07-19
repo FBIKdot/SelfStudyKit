@@ -7,6 +7,14 @@
 - Material Design 设计, 界面简洁
 - 基于HTML5, 跨平台
 
+# Install/Development
+
+~~~bash
+git clone https://github.com/BovineBeta/SelfStudyKit.git
+cd SelfStudyKit
+npm install
+~~~
+
 # Todo
 **Core**
 - [x] 主页
