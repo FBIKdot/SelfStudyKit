@@ -8,11 +8,11 @@ let $ = mdui.$;
 
 /**
  * @description: 随机生成一定范围的整数 
- * @param {Number} min=0 - 最小值, 整数
+ * @param {Number} min - 最小值, 整数,默认为
  * @param {Number} max - 最大值, 整数
- * @return {Number} - 随机生成的整数
+ * @return {Number} 随机生成的整数
  */
-const randomInt = (min = 0, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 /*
  * 数据处理函数声明 终
@@ -24,12 +24,50 @@ const randomInt = (min = 0, max) => Math.floor(Math.random() * (max - min + 1) +
 
 // 页面内容配置
 let page = {
-    name: ['index', 'welcome'],
+    content: {
+        'index': { title: '首页', icon: 'home' },
+        'welcome': { title: '欢迎使用', icon: 'star' },
+        'clock': { title: '时钟', icon: 'access_time' },
+        'pomodoro-timer': { title: '番茄钟', icon: 'timer' },
+        'word-notepad': { title: '单词本', icon: 'book' },
+        'settings': { title: '设置', icon: 'settings' }
+    },
+    drawer: {
+        subheader: { 'clock': '时间管理' }
+    },
     changer: new mdui.Tab('#page-changer'),
-    lab: new mdui.Fab('#fab-wrapper'),
-    fn: {}
+    fab: new mdui.Fab('#fab-wrapper'),
+    fn: {
+        /**
+         * @description 根据传入的参数更改 fab-wrapper 的外观与功能
+         * @param {Object} opts - 配置对象
+         * @param {string} [opts.close='add'] - fab 关闭时显示的图标
+         * @param {string} [opts.open='close'] - fab 打开时显示的图标
+         * @param {Array} opts.dial - 拨号按钮数组
+         * @param {string} [opts.dial[].icon='touch_app'] - 拨号按钮图标
+         * @param {string} [opts.dial[].color=''] - 拨号按钮颜色 
+         * @param {Function} opts.dial[].fn - 拨号按钮点击后执行的函数
+         * @returns {void} 没有返回值
+         */
+        fab_change: function ({
+            close: closeIcon = 'add',
+            open: openIcon = 'close',
+            dial = []
+        }) {
+            $('#fab-wrapper i').eq(0).text(closeIcon);
+            $('#fab-wrapper i').eq(1).text(openIcon);
+            $('#fab-dial').text('');
+            dial.forEach(([icon, color, fn], index) => {
+                $('#fab-dial').append(
+                    `<button class="mdui-fab mdui-fab-mini mdui-ripple ${color ? 'mdui-color-' + color : ''}">
+                    <i class="mdui-icon material-icons">${icon || 'touch_app'}</i></button>`)
+                $('#fab-dial button').eq(index).on('click', fn);
+            });
+            // console.log('page.fn.fab_change:', closeIcon, openIcon, dial);
+        }
+    }
 };
-console.log(page.lab);
+page.name = Object.keys(page.content);
 
 // 右上角mdui menu主题色更换按钮
 let darkModeState = window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -47,8 +85,13 @@ $('#theme-changer').on('click', () => {
     darkModeState = !darkModeState;
 });
 
-// 使用js调用mdui tab选项卡, 实现页面切换
+//* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
 page.name.forEach((element, index) => {
+    $('.mdui-list').append(
+        `${page.drawer.subheader[element] ? '<div class="mdui-subheader">' + page.drawer.subheader[element] + '</div>' : ''}`,
+        `<a class="mdui-list-item mdui-ripple" id="link-${element}">
+        <i class="mdui-list-item-icon mdui-icon material-icons">${page.content[element].icon}</i>
+        <div class="mdui-list-item-content">${page.content[element].title}</div></a>`)
     $('#link-' + element).on('click', () => page.changer.show(index));
 });
 
@@ -56,39 +99,12 @@ page.name.forEach((element, index) => {
 $('#page-changer').on('change.mdui.tab', event => {
     switch (event._detail.index) {
         case 1:
-            page.lab.show();
+            page.fab.show();
             break;
         default:
-            page.lab.hide();
+            page.fab.hide();
     };
 });
-
-/**
- * @description 根据传入的参数更改 fab-wrapper 的外观与功能
- * @param {Object} config - 一个包含以下属性的对象：
- *   @param {string} close='add' - 选填, 关闭时的mdui-icon名字
- *   @param {string} open='close' - 选填, 展开后的mdui-icon名字
- *   @param {Array} dial - 一个数组，包含以下两个元素：
- *     @param {string} dialIcon='touch_app' - 拨号的mdui-icon名字
- *     @param {string} dialColor - 选填, 拨号图标的颜色, 不填就不会给这个按钮添加mdui-color-*类
- *     @param {function} dialFn=function(){throw new Error("该拨号函数未定义");} - 拨号的函数
- * @return {void} - 此函数没有返回值
- */
-page.fn.fab_change = function ({
-    close: closeIcon = 'add',
-    open: openIcon = 'close',
-    dial = []
-}) {
-    dial = dial.map(([icon = 'touch_app', color, fn = function () { throw new Error("该拨号点击后执行的函数未定义"); }]) => [icon, color, fn]);
-    $('#fab-wrapper i').eq(0).text(closeIcon);
-    $('#fab-wrapper i').eq(1).text(openIcon);
-    $('#fab-dial').text('');
-    dial.forEach(([icon, color, fn], index) => {
-        $('#fab-dial').append(`<button class="mdui-fab mdui-fab-mini mdui-ripple ${'mdui-color-' + color || ''}"><i class="mdui-icon material-icons">${icon}</i></button>`)
-        $('#fab-dial button').eq(index).on('click', fn);
-    });
-    // console.log('page.fn.fab_change:', closeIcon, openIcon, dial);
-};
 
 // 测试用功能: 
 page.fn.fab_change({
