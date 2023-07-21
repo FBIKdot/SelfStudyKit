@@ -32,6 +32,7 @@ let page = {
         'word-notepad': { title: '单词本', icon: 'book' },
         'settings': { title: '设置', icon: 'settings' }
     },
+    get name(){return Object.keys(this.content);},
     drawer: {
         subheader: { 'clock': '时间管理' }
     },
@@ -67,7 +68,6 @@ let page = {
         }
     }
 };
-page.name = Object.keys(page.content);
 
 // 右上角mdui menu主题色更换按钮
 let darkModeState = window.matchMedia('(prefers-color-scheme:dark)').matches;
