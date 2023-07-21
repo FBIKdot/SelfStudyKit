@@ -1,6 +1,15 @@
-console.log('made by FBIK.');
+/*!
+ * SelfStudyKit v0.0.1 - 基于mdui的纯前端自习辅助工具集.
+ * https://github.com/BovineBeta/SelfStudyKit
+ * Copyright (C) 2023 FBIK <fbik@fbik.top>
+ * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE
+ */
+import 'mdui/dist/css/mdui.min.css'
+import mdui from 'mdui'
+import yiyan from './json/yiyan.json'
+import '../css/main.css'
 
-let $ = mdui.$;
+let $ = mdui.$
 
 /*
  * 数据处理函数声明 起
@@ -32,7 +41,7 @@ let page = {
         'word-notepad': { title: '单词本', icon: 'book' },
         'settings': { title: '设置', icon: 'settings' }
     },
-    get name(){return Object.keys(this.content);},
+    get name() { return Object.keys(this.content); },
     drawer: {
         subheader: { 'clock': '时间管理' }
     },
@@ -134,7 +143,7 @@ page.changer.show(1)
 //* 首页 index
 
 // 一言
-fetch('./js/json/yiyan.json')
+fetch(yiyan)
     .then(response => response.json())
     .then(data => $('#yiyan').text(data[randomInt(0, data.length)]))
     .catch(error => {
