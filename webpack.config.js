@@ -5,12 +5,12 @@ const TerserPlugin = require('terser-webpack-plugin')
 const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
-    entry: './js/main.js',
+    entry: './src/index.js',
     // watch: true,
     output: {
         path: path.join(__dirname, 'dist'),
         // publicPath: '/dist/',
-        filename: "bundle.js",
+        filename: "[name].js",
         // chunkFilename: '[name].js'
     },
     //* webpack开发服务器. 它不会自动更新html, 所以我更推荐启用watch然后使用Live Server --FBIK.
