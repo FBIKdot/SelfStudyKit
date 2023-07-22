@@ -7,12 +7,24 @@
 - Material Design 设计, 界面简洁
 - 基于HTML5, 跨平台
 
-# Install/Development
-
+# Development
+准备:
 ~~~bash
 git clone https://github.com/BovineBeta/SelfStudyKit.git
 cd SelfStudyKit
 npm install
+~~~
+运行webpack dev server:
+~~~
+npm run start
+~~~
+构建:
+~~~
+npm run build
+~~~
+实时构建 (可搭配vscode扩展live server使用):
+~~~
+npm run build-watch
 ~~~
 
 # Todo
@@ -26,7 +38,8 @@ npm install
 
 **Plus**
 - [ ] PWA Support
-- [ ] 可以预先同时设置多个番茄钟
+- [ ] 番茄钟多项预设置支持
 
 **Desktop version**
 - [ ] Niva Support
+- [ ] Electron build (low priority)
