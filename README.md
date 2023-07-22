@@ -1,5 +1,5 @@
 # SelfStudyKit
-# :warning:此项目的最初版本未完成
+# :warning:此项目的最初版本未完成. 如果你对这个项目有兴趣, 可以启用watch勾选Releases以便让Github在每次Release时进行通知.
 基于 [MDUI](https://github.com/zdhxiong/mdui) 的纯前端自习辅助工具集.
 
 # Feature
