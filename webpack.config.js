@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         // publicPath: '/dist/',
-        filename: "[name].js",
+        filename: "index.js",
         // chunkFilename: '[name].js'
     },
     //* webpack开发服务器. 它不会自动更新html, 所以我更推荐启用watch然后使用Live Server --FBIK.
