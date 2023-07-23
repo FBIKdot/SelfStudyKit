@@ -1,6 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // //暂时弃用
 const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
@@ -10,12 +10,12 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         // publicPath: '/dist/',
-        filename: "index.js",
+        filename: 'index.js',
         // chunkFilename: '[name].js'
     },
     //* webpack开发服务器. 它不会自动更新html, 所以我更推荐启用watch然后使用Live Server --FBIK.
-    devServer:{
-        static:'./dist'
+    devServer: {
+        static: './dist',
     },
     optimization: {
         minimizer: [
@@ -55,7 +55,6 @@ module.exports = {
                             minifyJS: true,
                         });
                     },
-
                 },
             ],
         }),
@@ -64,10 +63,12 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader']
-            }, {
+                use: ['style-loader', 'css-loader'],
+            },
+            {
                 test: /\.(json|html)$/i,
-                type: 'asset/resource'
-            }]
-    }
+                type: 'asset/resource',
+            },
+        ],
+    },
 };
