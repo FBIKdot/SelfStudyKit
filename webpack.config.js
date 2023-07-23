@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
+    // devtool: 'inline-source-map',
     entry: './src/index.js',
     // watch: true,
     output: {
@@ -68,6 +69,16 @@ module.exports = {
             {
                 test: /\.(json|html)$/i,
                 type: 'asset/resource',
+            },
+            {
+                test: /\.js$/,
+                exclude: /node-module/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    },
+                },
             },
         ],
     },

@@ -22,6 +22,9 @@
     "mdui": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "babel-loader": "^9.1.3",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "html-minifier": "^4.0.0",
