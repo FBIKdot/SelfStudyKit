@@ -43,11 +43,23 @@
             <a href="#page-index"></a>
             <a href="#page-welcome"></a>
             <a href="#page-clock"></a>
+            <a href="#page-pomodoro-timer"></a>
+            <a href="#page-word-notepad"></a>
+            <a href="#page-settings"></a>
+        </div>
+
+        <!-- 浮动操作按钮 -->
+        <div class="mdui-fab-wrapper mdui-fab-hide" id="fab-wrapper">
+            <button class="mdui-fab mdui-ripple mdui-color-theme-accent">
+                <i class="mdui-icon material-icons">add</i>
+                <i class="mdui-icon mdui-fab-opened material-icons">close</i>
+            </button>
+            <div class="mdui-fab-dial" id="fab-dial"></div>
         </div>
 
         <!-- 首页 -->
         <div id="page-index" class="mdui-p-a-2">
-            <div class="text-center">
+            <div class="mdui-typo text-center">
                 <div style="font-size: 500%">自律</div>
                 <div style="font-size: 200%; opacity: 0.5" id="yiyan"><br /></div>
             </div>
@@ -76,21 +88,21 @@
         </div>
 
         <!-- 时钟 -->
-        <div id="page-clock" class="mdui">
+        <div id="page-clock" class="mdui-typo">
             <div class="text-center">
                 <div style="font-size: 300%" id="page-clock-title"></div>
-                <div style="font-size: 600%" id="page-clock-text"></div>
+                <div style="font-size: 500%" id="page-clock-text"></div>
             </div>
         </div>
 
-        <!-- 浮动操作按钮 -->
-        <div class="mdui-fab-wrapper mdui-fab-hide" id="fab-wrapper">
-            <button class="mdui-fab mdui-ripple mdui-color-theme-accent">
-                <i class="mdui-icon material-icons">add</i>
-                <i class="mdui-icon mdui-fab-opened material-icons">close</i>
-            </button>
-            <div class="mdui-fab-dial" id="fab-dial"></div>
-        </div>
+        <!-- 番茄钟 -->
+        <div id="page-pomodoro-timer" class="mdui-typo">番茄钟 待开发</div>
+
+        <!-- 单词本 -->
+        <div id="page-word-notepad" class="mdui-typo">单词本 待开发</div>
+
+        <!-- 设置 -->
+        <div id="page-settings" class="mdui-typo">设置 待开发</div>
 
         <script src="./index.js"></script>
     </body>

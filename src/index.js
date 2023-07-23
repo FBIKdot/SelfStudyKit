@@ -40,7 +40,6 @@ let page = {
             title: '时钟',
             icon: 'access_time',
             settings: {
-                run: false,
                 title: '当前时间',
             },
         },
@@ -154,9 +153,9 @@ page.name.forEach((element, index) => {
                 ? '<div class="mdui-subheader">' + page.drawer.subheader[element] + '</div>'
                 : ''
         } `,
-        `<a class="mdui-list-item mdui-ripple" id="link-${element}"> ` +
-            `<i class="mdui-list-item-icon mdui-icon material-icons"> ${page.config[element].icon}</i > ` +
-            `<div class="mdui-list-item-content"> ${page.config[element].title}</div ></a > `,
+        `<a class="mdui-list-item mdui-ripple" id="link-${element}">` +
+            `<i class="mdui-list-item-icon mdui-icon material-icons">${page.config[element].icon}</i>` +
+            `<div class="mdui-list-item-content">${page.config[element].title}</div></a> `,
     );
     $('#link-' + element).on('click', () => page.changer.show(index));
 });
