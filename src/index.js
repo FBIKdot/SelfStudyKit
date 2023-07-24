@@ -11,6 +11,27 @@ import './css/main.css';
 
 let $ = mdui.$;
 
+// vercel预先构建警告
+if (window.location.host === 'self-study-kit.vercel.app') {
+    let devWarning = ` * SelfStudyKit v0.x 未开发完成 - 基于mdui的纯前端自习辅助工具集.
+ * https://github.com/BovineBeta/SelfStudyKit
+ * Copyright (C) 2023 FBIK <fbik@fbik.top>
+ * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE`;
+    window.location.assign(window.location.host + '/#delay');
+    mdui.dialog({
+        title: '没做完',
+        content:
+            '你在使用 Vercel 自动构建. <br/ >目前开发未完成, 无法保证上一次代码提交前做好了充分的调试, 因此你可能会遇到bug.' +
+            devWarning.replace(/(\s)\*(\s)/g, '<br/ > * '),
+        buttons: [
+            {
+                text: '确认',
+            },
+        ],
+    });
+    console.warn(devWarning);
+}
+
 /*
  * 数据处理函数声明 起
  */
@@ -237,18 +258,53 @@ new mdui.Tooltip('#tooltip-番茄工作法', {
 $('#page-clock-title').text(page.config.clock.settings.title);
 
 //* 番茄钟
+$('#page-pomodoro-timer-options input')
+    .eq(3)
+    .on('click', () => {
+        let checked = $('#page-pomodoro-timer-options input').eq(3).prop('checked');
+        $('#page-pomodoro-timer-options input')
+            .eq(2)
+            .attr('disabled', !checked ? true : null);
+        $('#page-pomodoro-timer-options label')
+            .eq(2)
+            .text(checked ? '长休息时间' : '已关闭 长休息时间');
+        $('#page-pomodoro-timer-options .mdui-textfield').eq(2).removeClass('mdui-textfield-invalid');
+    });
 page.pomodoro_timer.changer.show(0);
 $('#button-pomodoro-timer-start').on('click', () => {
-    $('#button-menu').on('click', () => {
-        page.drawer.dom.close();
+    console.log($('#page-pomodoro-timer-options input').eq(3).prop('checked') ? '开' : '关');
+
+    let hasError = false;
+    [0, 1, 2].forEach(element => {
+        let warning = $('#page-pomodoro-timer-options .mdui-textfield-error').eq(element);
+        let input = $('#page-pomodoro-timer-options input').eq(element);
+        let textfield = $('#page-pomodoro-timer-options .mdui-textfield').eq(element);
+        if (
+            /^[1-9]\d*$/.test(input.val()) ||
+            (element === 2 && !$('#page-pomodoro-timer-options input').eq(3).prop('checked'))
+        ) {
+            warning.text('');
+            textfield.removeClass('mdui-textfield-invalid');
+        } else {
+            warning.text('内容必须为正整数');
+            hasError = true;
+            console.log(warning);
+            textfield.addClass('mdui-textfield-invalid');
+        }
     });
-    let input = $('#page-pomodoro-timer-options').find('input');
-    let settings = {
-        pomodoro: Number(input.eq(0).val()),
-        short_break: Number(input.eq(1).val()),
-        long_break: Number(input.eq(2).val()),
-    };
-    page.pomodoro_timer.changer.show(1);
+
+    if (!hasError) {
+        $('#button-menu').on('click', () => {
+            page.drawer.dom.close();
+        });
+        let input = $('#page-pomodoro-timer-options input');
+        let settings = {
+            pomodoro: Number(input.eq(0).val()),
+            short_break: Number(input.eq(1).val()),
+            long_break: Number(input.eq(2).val()),
+        };
+        page.pomodoro_timer.changer.show(1);
+    }
 });
 
 /*
