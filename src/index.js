@@ -13,23 +13,10 @@ let $ = mdui.$;
 
 // vercel预先构建警告
 if (window.location.host === 'self-study-kit.vercel.app') {
-    let devWarning = ` * SelfStudyKit v0.x 未开发完成 - 基于mdui的纯前端自习辅助工具集.
+    console.warn(` * SelfStudyKit v0.x 未开发完成 - 基于mdui的纯前端自习辅助工具集.
  * https://github.com/BovineBeta/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
- * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE`;
-    window.location.assign('/#delay');
-    mdui.dialog({
-        title: '没做完',
-        content:
-            '你在使用 Vercel 自动构建. <br/ >目前开发未完成, 无法保证上一次代码提交前做好了充分的调试, 因此你可能会遇到bug.' +
-            devWarning.replace(/(\s)\*(\s)/g, '<br/ > * '),
-        buttons: [
-            {
-                text: '确认',
-            },
-        ],
-    });
-    console.warn(devWarning);
+ * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE`);
 }
 
 /*
