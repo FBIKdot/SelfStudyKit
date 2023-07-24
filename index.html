@@ -1,109 +1,149 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Self Study Kit</title>
-    </head>
 
-    <body class="mdui-appbar-with-toolbar mdui-theme-accent-orange mdui-theme-layout-auto">
-        <!-- mdui工具栏 -->
-        <div class="mdui-appbar mdui-appbar-fixed">
-            <div class="mdui-toolbar mdui-color-theme">
-                <a href="javascript:;" mdui-drawer="{target: '#drawer'}" class="mdui-btn mdui-btn-icon">
-                    <i class="mdui-icon material-icons">menu</i>
-                </a>
-                <a href="javascript:;" class="mdui-typo-headline">Self Study Kit</a>
-                <a href="javascript:;" class="mdui-typo-title">首页</a>
-                <div class="mdui-toolbar-spacer"></div>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Self Study Kit</title>
+</head>
 
-                <botton href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#right-menu'}">
-                    <i class="mdui-icon material-icons">more_vert</i>
-                </botton>
-                <ul class="mdui-menu" id="right-menu">
-                    <li class="mdui-menu-item">
-                        <a href="javascript:;" class="mdui-ripple" id="theme-changer">
-                            <i class="mdui-menu-item-icon mdui-icon material-icons" id="theme-changer-icon"
-                                >brightness_auto</i
-                            ><span>切换主题颜色</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<body class="mdui-appbar-with-toolbar mdui-theme-accent-orange mdui-theme-layout-auto">
+    <!-- mdui工具栏 -->
+    <div class="mdui-appbar mdui-appbar-fixed">
+        <div class="mdui-toolbar mdui-color-theme">
+            <a href="javascript:;" class="mdui-btn mdui-btn-icon" id="button-menu">
+                <i class="mdui-icon material-icons">menu</i>
+            </a>
+            <a href="javascript:;" class="mdui-typo-headline">Self Study Kit</a>
+            <a href="javascript:;" class="mdui-typo-title">首页</a>
+            <div class="mdui-toolbar-spacer"></div>
 
-        <!-- mdui侧边栏 -->
-        <div class="mdui-drawer mdui-shadow-6 mdui-drawer-close" id="drawer">
-            <div class="mdui-list"></div>
-        </div>
-
-        <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 用于实现页面切换 -->
-        <div class="mdui-tab" mdui-tab style="display: none" id="page-changer">
-            <a href="#page-index"></a>
-            <a href="#page-welcome"></a>
-            <a href="#page-clock"></a>
-            <a href="#page-pomodoro-timer"></a>
-            <a href="#page-word-notepad"></a>
-            <a href="#page-settings"></a>
-        </div>
-
-        <!-- 浮动操作按钮 -->
-        <div class="mdui-fab-wrapper mdui-fab-hide" id="fab-wrapper">
-            <button class="mdui-fab mdui-ripple mdui-color-theme-accent">
-                <i class="mdui-icon material-icons">add</i>
-                <i class="mdui-icon mdui-fab-opened material-icons">close</i>
+            <button href="javascript:;" class="mdui-btn mdui-btn-icon">
+                <i class="mdui-icon material-icons">more_vert</i>
             </button>
-            <div class="mdui-fab-dial" id="fab-dial"></div>
+            <ul class="mdui-menu" id="right-menu">
+                <li class="mdui-menu-item">
+                    <a href="javascript:;" class="mdui-ripple" id="theme-changer">
+                        <i class="mdui-menu-item-icon mdui-icon material-icons"
+                            id="theme-changer-icon">brightness_auto</i><span>切换主题颜色</span>
+                    </a>
+                </li>
+            </ul>
         </div>
+    </div>
 
-        <!-- 首页 -->
-        <div id="page-index" class="mdui-p-a-2">
-            <div class="mdui-typo text-center">
-                <div style="font-size: 500%">自律</div>
-                <div style="font-size: 200%; opacity: 0.5" id="yiyan"><br /></div>
+    <!-- mdui侧边栏 -->
+    <div class="mdui-drawer mdui-shadow-6 mdui-drawer-close" id="drawer">
+        <div class="mdui-list"></div>
+    </div>
+
+    <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 用于实现页面切换 -->
+    <div class="mdui-tab" mdui-tab style="display: none" id="page-changer">
+        <a href="#page-index"></a>
+        <a href="#page-welcome"></a>
+        <a href="#page-clock"></a>
+        <a href="#page-pomodoro-timer"></a>
+        <a href="#page-word-notepad"></a>
+        <a href="#page-settings"></a>
+    </div>
+
+    <!-- 浮动操作按钮 -->
+    <div class="mdui-fab-wrapper mdui-fab-hide" id="fab-wrapper">
+        <button class="mdui-fab mdui-ripple mdui-color-theme-accent">
+            <i class="mdui-icon material-icons">add</i>
+            <i class="mdui-icon mdui-fab-opened material-icons">close</i>
+        </button>
+        <div class="mdui-fab-dial" id="fab-dial"></div>
+    </div>
+
+    <!-- 首页 -->
+    <div id="page-index" class="mdui-p-a-2">
+        <div class="mdui-typo text-center">
+            <div style="font-size: 500%">自律</div>
+            <div style="font-size: 200%; opacity: 0.5" id="yiyan"><br /></div>
+        </div>
+    </div>
+
+    <!-- 欢迎使用 -->
+    <div id="page-welcome" class="mdui-typo mdui-container">
+        <h1>欢迎使用 Self Study Kit !</h1>
+        <div>Self Study Kit 是一个基于H5的自习辅助工具集.</div>
+        <h1>工具大全</h1>
+        <div>
+            时间管理
+            <h2>时钟</h2>
+            实时显示时间的工具, 可选择附上当前时间的其他相关详细信息.
+            <h2>番茄钟</h2>
+            一个帮助实现
+            <a href="https://baike.baidu.com/item/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95/6353502"
+                id="tooltip-番茄工作法">"番茄工作法"</a>
+            的倒计时工具, 可用于协调自己在学习间的休息时间.
+            <h2>单词本</h2>
+            一个记录不熟悉单词的工具, 可以用于辅助背记单词.
+        </div>
+    </div>
+
+    <!-- 时钟 -->
+    <div id="page-clock" class="mdui-typo mdui-container">
+        <div class="text-center">
+            <div style="font-size: 300%" id="page-clock-title"></div>
+            <div style="font-size: 500%" id="page-clock-text"></div>
+        </div>
+    </div>
+
+    <!-- 番茄钟 -->
+
+    <div id="page-pomodoro-timer">
+        <div class="mdui-tab" mdui-tab style="display: none" id="page-pomodoro-timer-page-changer">
+            <a href="#page-pomodoro-timer-options"></a>
+            <a href="#page-pomodoro-timer-clock"></a>
+        </div>
+        <div id="page-pomodoro-timer-options" class="mdui-typo">
+            <div class="mdui-col-xs-6" style="transform: translateX(40%);">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <i class="mdui-icon material-icons">textsms</i>
+                    <label class="mdui-textfield-label">专注时间</label>
+                    <input class="mdui-textfield-input" type="专注时间" />
+                </div>
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <i class="mdui-icon material-icons">textsms</i>
+                    <label class="mdui-textfield-label">休息时间</label>
+                    <input class="mdui-textfield-input" type="休息时间" />
+                </div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-10 mdui-textfield mdui-textfield-floating-label">
+                        <i class="mdui-icon material-icons">textsms</i>
+                        <label class="mdui-textfield-label">长休息时间</label>
+                        <input class="mdui-textfield-input" type="长休息时间" />
+                    </div>
+                    <label class="mdui-col-xs-2 mdui-switch">
+                        <br />
+                        <input type="checkbox" checked />
+                        <i class="mdui-switch-icon"></i>
+                    </label>
+                </div>
+                <br />
+                <div style="text-align: center;">
+                    <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent"
+                        id="button-pomodoro-timer-start">开始!</button>
+                </div>
             </div>
         </div>
-
-        <!-- 欢迎使用 -->
-        <div id="page-welcome" class="mdui-typo mdui-p-a-2">
-            <h1>欢迎使用 Self Study Kit !</h1>
-            <div>Self Study Kit 是一个基于H5的自习辅助工具集.</div>
-            <h1>工具大全</h1>
-            <div>
-                时间管理
-                <h2>时钟</h2>
-                实时显示时间的工具, 可选择附上当前时间的其他相关详细信息.
-                <h2>番茄钟</h2>
-                一个帮助实现
-                <a
-                    href="https://baike.baidu.com/item/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95/6353502"
-                    id="tooltip-番茄工作法"
-                    >"番茄工作法"</a
-                >
-                的倒计时工具, 可用于协调自己在学习间的休息时间.
-                <h2>单词本</h2>
-                一个记录不熟悉单词的工具, 可以用于辅助背记单词.
-            </div>
+        <div id="page-pomodoro-timer-clock" class="mdui-typo">
+            a
         </div>
 
-        <!-- 时钟 -->
-        <div id="page-clock" class="mdui-typo">
-            <div class="text-center">
-                <div style="font-size: 300%" id="page-clock-title"></div>
-                <div style="font-size: 500%" id="page-clock-text"></div>
-            </div>
-        </div>
+    </div>
 
-        <!-- 番茄钟 -->
-        <div id="page-pomodoro-timer" class="mdui-typo">番茄钟 待开发</div>
 
-        <!-- 单词本 -->
-        <div id="page-word-notepad" class="mdui-typo">单词本 待开发</div>
+    <!-- 单词本 -->
+    <div id="page-word-notepad" class="mdui-typo">单词本 待开发</div>
 
-        <!-- 设置 -->
-        <div id="page-settings" class="mdui-typo">设置 待开发</div>
+    <!-- 设置 -->
+    <div id="page-settings" class="mdui-typo">设置 待开发</div>
 
-        <script src="./index.js"></script>
-    </body>
+    <script src="./index.js"></script>
+</body>
+
 </html>

@@ -22,6 +22,31 @@ let $ = mdui.$;
  * @return {Number} 随机生成的整数
  */
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+/**
+ * @description 根据一个时间戳和样式生成一个时间文本
+ * @param {string} [style='{年}/{月}/{日} {时}:{分}:{秒}'] 时间样式字符串, 默认为'{年}/{月}/{日} {时}:{分}:{秒}'
+ * @param {Date} [time=new Date()] 一个时间戳
+ * @return {string} 生成的时间文本
+ */
+function timeTextDiy(style = '{年}/{月}/{日} {时}:{分}:{秒}', time = new Date()) {
+    let god = new Date(time);
+    let DIZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+    let HANZI = ['天', '一', '二', '三', '四', '五', '六'];
+    let type = {
+        年: god.getFullYear(),
+        月: god.getMonth() + 1,
+        日: god.getDate(),
+        时: god.getHours().toString().padStart(2, '0'),
+        分: god.getMinutes().toString().padStart(2, '0'),
+        秒: god.getSeconds().toString().padStart(2, '0'),
+        毫秒: god.getMilliseconds(),
+        星期: HANZI[god.getDay()],
+        时辰: `${DIZHI[[Math.floor((god.getHours() % 12) + god.getMinutes() / 60)]]}时${
+            HANZI[Math.floor(god.getMinutes() / 15)]
+        }刻`,
+    };
+    return style.replace(/{([^}]+)}/g, (match, p1) => type[p1]);
+}
 
 /*
  * 数据处理函数声明 终
@@ -52,9 +77,13 @@ let page = {
     },
     drawer: {
         subheader: { clock: '时间管理' },
+        dom: new mdui.Drawer('#drawer'),
     },
     changer: new mdui.Tab('#page-changer'),
     fab: new mdui.Fab('#fab-wrapper'),
+    pomodoro_timer: {
+        changer: new mdui.Tab('#page-pomodoro-timer-page-changer'),
+    },
     fn: {
         /**
          * @description 根据传入的参数更改 fab-wrapper 的外观与功能
@@ -81,39 +110,14 @@ let page = {
         },
         clock: {
             /**
-             * @description 根据一个时间戳和样式生成一个时间文本
-             * @param {string} [style='{年}/{月}/{日} {时}:{分}:{秒}'] 时间样式字符串, 默认为'{年}/{月}/{日} {时}:{分}:{秒}'
-             * @param {Date} [time=new Date()] 一个时间戳
-             * @return {string} 生成的时间文本
-             */
-            timeTextDiy: function (style = '{年}/{月}/{日} {时}:{分}:{秒}', time = new Date()) {
-                let god = new Date(time);
-                let DIZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-                let HANZI = ['一', '二', '三', '四'];
-                let type = {
-                    年: god.getFullYear(),
-                    月: god.getMonth() + 1,
-                    日: god.getDate() === 0 ? '天' : god.getDate(),
-                    时: god.getHours().toString().padStart(2, '0'),
-                    分: god.getMinutes().toString().padStart(2, '0'),
-                    秒: god.getSeconds().toString().padStart(2, '0'),
-                    毫秒: god.getMilliseconds(),
-                    星期: god.getDay() + 1,
-                    时辰: `${DIZHI[[Math.floor((god.getHours() % 12) + god.getMinutes() / 60)]]}时${
-                        HANZI[Math.floor(god.getMinutes() / 15)]
-                    }刻`,
-                };
-                return style.replace(/{([^}]+)}/g, (match, p1) => type[p1]);
-            },
-            /**
              * @description 创建clock实例并启动
              * @param {string} [target='#page-clock-text'] 目标, 使用css选择器, 默认为#page-clock-text
              * @param {string} style 时间样式字符串, 默认为'{年}/{月}/{日} {时}:{分}:{秒}'
              * @param {number} [delay=100] 间隔时间, 默认为100
              */
             start: function (target = '#page-clock-text', style, delay = 100) {
-                this.instance[target] = setInterval(() => {
-                    $(target).text(this.timeTextDiy(style));
+                this.instances[target] = setInterval(() => {
+                    $(target).text(timeTextDiy(style));
                 }, delay);
             },
             /**
@@ -121,14 +125,23 @@ let page = {
              * @param {string} [target='#page-clock-text'] 目标, 使用css选择器, 默认为#page-clock-text
              */
             stop: function (target = '#page-clock-text') {
-                clearInterval(this.instance[target]);
-                delete this.instance[target];
+                clearInterval(this.instances[target]);
+                delete this.instances[target];
             },
-            instance: {},
+            instances: {},
+        },
+        'pomodoro-timer': {
+            run: false,
+            start: function () {},
+            stop: function () {},
         },
     },
 };
-document.querySelectorAll;
+// 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
+$('#button-menu').on('click', () => {
+    page.drawer.dom.open();
+});
+
 // 右上角mdui menu主题色更换按钮
 let darkModeState = window.matchMedia('(prefers-color-scheme:dark)').matches;
 $('#theme-changer').on('click', () => {
@@ -169,6 +182,7 @@ page.name.forEach((element, index) => {
  */
 //* 页面切换 逻辑
 $('#page-changer').on('change.mdui.tab', event => {
+    //默认隐藏fab
     page.fab.hide();
     page.fn.clock.stop();
     switch (event._detail.index) {
@@ -200,7 +214,7 @@ page.fn.fab_change({
     ],
 });
 // 临时用于切换到默认页面
-page.changer.show(2);
+page.changer.show(3);
 //* 测试区 终
 
 //* 首页 index
@@ -221,6 +235,21 @@ new mdui.Tooltip('#tooltip-番茄工作法', {
 
 //* 时钟
 $('#page-clock-title').text(page.config.clock.settings.title);
+
+//* 番茄钟
+page.pomodoro_timer.changer.show(0);
+$('#button-pomodoro-timer-start').on('click', () => {
+    $('#button-menu').on('click', () => {
+        page.drawer.dom.close();
+    });
+    let input = $('#page-pomodoro-timer-options').find('input');
+    let settings = {
+        pomodoro: Number(input.eq(0).val()),
+        short_break: Number(input.eq(1).val()),
+        long_break: Number(input.eq(2).val()),
+    };
+    console.log(settings);
+});
 
 /*
  * 页面功能声明区 终
