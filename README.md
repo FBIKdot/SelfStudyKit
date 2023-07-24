@@ -37,6 +37,12 @@ npm run build
 npm run build-watch
 ```
 
+生产模式构建:
+
+```
+npm run build-production
+```
+
 # Todo
 
 **Core**
