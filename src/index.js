@@ -248,7 +248,7 @@ $('#button-pomodoro-timer-start').on('click', () => {
         short_break: Number(input.eq(1).val()),
         long_break: Number(input.eq(2).val()),
     };
-    console.log(settings);
+    page.pomodoro_timer.changer.show(1);
 });
 
 /*
