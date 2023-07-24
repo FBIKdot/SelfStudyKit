@@ -17,7 +17,7 @@ if (window.location.host === 'self-study-kit.vercel.app') {
  * https://github.com/BovineBeta/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
  * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE`;
-    window.location.assign(window.location.host + '/#delay');
+    window.location.assign('/#delay');
     mdui.dialog({
         title: '没做完',
         content:
