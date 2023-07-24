@@ -1,3 +1,5 @@
 {
-    "liveServer.settings.root": "./dist"
+    "liveServer.settings.root": "./dist",
+    "prettier.enable": true,
+    "editor.formatOnSave": true
 }

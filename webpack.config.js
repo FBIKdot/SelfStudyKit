@@ -1,7 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // //暂时弃用
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); //暂时弃用
 const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
