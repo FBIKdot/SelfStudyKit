@@ -52,7 +52,7 @@ let page = {
             },
         },
         'pomodoro-timer': { title: '番茄钟', icon: 'timer' },
-        'word-notepad': { title: '单词本', icon: 'book' },
+        /* 'word-notepad': { title: '单词本', icon: 'book' }, */
         settings: { title: '设置', icon: 'settings' },
     },
     get name() {
@@ -146,7 +146,7 @@ let page = {
              */
             getTimeDiff: function (time) {
                 let diff = new Date(time).getTime() - new Date().getTime();
-                console.log('diff', diff);
+                // console.log('diff', diff);
                 return diff < 0
                     ? void 0
                     : Math.floor((diff / (1000 * 60)) % 60)
@@ -160,14 +160,14 @@ let page = {
             /**
              * @description 创建并启动番茄钟实例
              * @param {string} [targetDOM='#page-pomodoro-timer-display div'] 目标DOM, 使用css选择器, 默认为'#page-pomodoro-timer-display div'
-             * @param {number} [delay=1000] 间隔时间, 默认为1000
+             * @param {number} [delay=100] 间隔时间, 默认为100
              * @param {Number} pomodoro_time 专注时间
              * @param {Number} short_break_time 休息时间
              * @param {Number} [long_break_time=undefined] 长休息时间
              */
             init: function (
                 targetDOM = '#page-pomodoro-timer-display div',
-                delay = 1000,
+                delay = 100,
                 pomodoro_time,
                 short_break_time,
                 long_break_time,
@@ -180,10 +180,10 @@ let page = {
                         long_break: long_break_time,
                     },
                 };
-                $('#button-menu').on('click', () => {
-                    page.drawer.dom.close();
-                });
-                this.next(targetDOM, this.instances[targetDOM].settings.pomodoro, delay);
+                page.pomodoro_timer.changer.show(1);
+                page.drawer.dom.close();
+                $('#button-menu').on('click', () => page.drawer.dom.close());
+                this.next(targetDOM, delay);
             },
             /**
              * @description 切换番茄钟实例到下个阶段. 如果刚刚初始化, 则是启动番茄钟实例
@@ -193,11 +193,17 @@ let page = {
             next: function (targetDOM, delay) {
                 // 浅拷贝
                 let instance = this.instances[targetDOM];
+                clearInterval(this.instances[targetDOM].interval);
                 delete instance.interval;
 
                 let status = instance.status;
                 let settings = instance.settings;
-                (status === 2 && settings.long_break === void 0) || status === 3 ? (status = 1) : ++status;
+                console.log('status', status);
+                if ((status === 2 && settings.long_break === void 0) || status === 3) {
+                    status = 1;
+                } else {
+                    status += 1;
+                }
                 let nextStatus = (status === 2 && settings.long_break === void 0) || status === 3 ? 1 : status + 1;
                 let phase = [void 0, 'pomodoro', 'short_break', 'long_break'];
                 let phaseName = ['初始化', '专注时间', '休息时间', '长休息时间'];
@@ -218,17 +224,16 @@ let page = {
                 clearInterval(this.instances[target].interval);
                 delete this.instances[target];
                 $('#button-menu').on('click', () => {
-                    page.drawer.dom.open();
+                    page.drawer.dom.toggle();
                 });
+                page.pomodoro_timer.changer.show(0);
             },
             instances: {},
         },
     },
 };
 // 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
-$('#button-menu').on('click', () => {
-    page.drawer.dom.open();
-});
+$('#button-menu').on('click', () => page.drawer.dom.toggle());
 
 // 右上角mdui menu主题色更换按钮
 let darkModeState = window.matchMedia('(prefers-color-scheme:dark)').matches;
@@ -363,21 +368,35 @@ $('#button-pomodoro-timer-start').on('click', () => {
             short_break: Number(input.eq(1).val()),
             long_break: Number(input.eq(2).val()),
         };
-        page.pomodoro_timer.changer.show(1);
+
         // 倒计时
         page.fn.pomodoro_timer.init(
             '#page-pomodoro-timer-display div',
-            1000,
+            100,
             settings.pomodoro,
             settings.short_break,
             settings.long_break,
         );
     }
 });
-$('#button-pomodoro-timer-next').on('click', () => {
-    page.fn.pomodoro_timer.next('#page-pomodoro-timer-display div', 1000);
+$('#button-pomodoro-timer-next').on('click', () =>
+    page.fn.pomodoro_timer.next('#page-pomodoro-timer-display div', 100),
+);
+$('#button-pomodoro-timer-stop').on('click', () => {
+    mdui.dialog({
+        title: '确定?',
+        content: '你确定要结束番茄钟吗?',
+        buttons: [
+            {
+                text: '取消',
+            },
+            {
+                text: '确定',
+                onClick: () => page.fn.pomodoro_timer.stop(),
+            },
+        ],
+    });
 });
-$('#button-pomodoro-timer-stop').on('click', () => {});
 /*
  * 页面功能声明区 终
  */
