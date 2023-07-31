@@ -16,31 +16,31 @@
 ```bash
 git clone https://github.com/BovineBeta/SelfStudyKit.git
 cd SelfStudyKit
-npm install
+yarn # 或者 npm install
 ```
 
 运行 webpack dev server:
 
 ```
-npm run start
+yarn start # 或者 npm run start, 以此类推
 ```
 
-构建:
+开发模式构建:
 
 ```
-npm run build
+yarn build
 ```
 
 实时构建 (可搭配 vscode 扩展 live server 使用):
 
 ```
-npm run build-watch
+yarn build-watch
 ```
 
 生产模式构建:
 
 ```
-npm run build-production
+yarn build-production
 ```
 
 # Todo
@@ -58,6 +58,7 @@ npm run build-production
 
 -   [ ] PWA Support
 -   [ ] 番茄钟多项预设置支持
+-   [ ] Refactoring with TypeScript
 
 **Desktop version**
 
