@@ -69,16 +69,14 @@ let page = {
     },
     fn: {
         /**
-         * @description 根据传入的参数更改 fab-wrapper 的外观与功能
+         * 根据传入的参数更改 fab-wrapper 的外观与功能
+         *
          * @param {Object} opts - 配置对象
          * @param {string} [opts.close='add'] - fab 关闭时显示的图标
          * @param {string} [opts.open='close'] - fab 打开时显示的图标
-         * @param {Array} opts.dial - 拨号按钮数组
-         * @param {string} [opts.dial[].icon='touch_app'] - 拨号按钮图标
-         * @param {string} [opts.dial[].color=''] - 拨号按钮颜色
-         * @param {Function} opts.dial[].fn - 拨号按钮点击后执行的函数
+         * @param {Array<{icon: string, color: string, fn: Function}>} opts.dial - 拨号按钮数组
          */
-        fab_change: function ({ close: closeIcon = 'add', open: openIcon = 'close', dial = [] }) {
+        fab_change: function ({ close: closeIcon = 'add', open: openIcon = 'close', dial}) {
             $('#fab-wrapper i').eq(0).text(closeIcon);
             $('#fab-wrapper i').eq(1).text(openIcon);
             $('#fab-dial').text('');
@@ -174,6 +172,7 @@ let page = {
             ) {
                 this.instances[targetDOM] = {
                     status: 0,
+                    turn: 0,
                     settings: {
                         pomodoro: pomodoro_time,
                         short_break: short_break_time,
@@ -192,28 +191,31 @@ let page = {
              */
             next: function (targetDOM, delay) {
                 // 浅拷贝
-                let instance = this.instances[targetDOM];
-                clearInterval(this.instances[targetDOM].interval);
-                delete instance.interval;
+                let i = this.instances[targetDOM];
+                clearInterval(i.interval);
+                delete i.interval;
 
-                let status = instance.status;
-                let settings = instance.settings;
-                console.log('status', status);
-                if ((status === 2 && settings.long_break === void 0) || status === 3) {
-                    status = 1;
+                console.log('status', i.status);
+                if ((i.status === 2 && i.settings.long_break === void 0) || i.status === 3) {
+                    i.status = 1;
                 } else {
-                    status += 1;
+                    ++i.status;
                 }
-                let nextStatus = (status === 2 && settings.long_break === void 0) || status === 3 ? 1 : status + 1;
+                console.log('status', i.status);
+                let nextStatus =
+                    (i.status === 2 && i.settings.long_break === void 0) || i.status === 3 ? 1 : i.status + 1;
                 let phase = [void 0, 'pomodoro', 'short_break', 'long_break'];
                 let phaseName = ['初始化', '专注时间', '休息时间', '长休息时间'];
-                $(targetDOM).eq(0).text(phaseName[status]);
-                let time = new Date().getTime() + settings[phase[status]] * 1000 * 60;
+                $(targetDOM).eq(0).text(phaseName[i.status]);
+                let time = new Date().getTime() + i.settings[phase[i.status]] * 1000 * 60;
                 $(targetDOM)
                     .eq(2)
                     .text('下一阶段: ' + phaseName[nextStatus]);
+                $(targetDOM).eq(1).text(this.getTimeDiff(time));
                 this.instances[targetDOM].interval = setInterval(() => {
-                    $(targetDOM).eq(1).text(this.getTimeDiff(time));
+                    this.getTimeDiff(time)
+                        ? $(targetDOM).eq(1).text(this.getTimeDiff(time))
+                        : this.next(targetDOM, delay);
                 }, delay);
             },
             /**
@@ -276,6 +278,7 @@ page.name.forEach((element, index) => {
 //* 页面切换 逻辑
 $('#page-changer').on('change.mdui.tab', event => {
     //默认隐藏fab
+    event._detail ||= undefined;
     page.fab.hide();
     page.fn.clock.stop();
     switch (event._detail.index) {
