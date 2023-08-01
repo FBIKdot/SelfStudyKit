@@ -9,19 +9,6 @@ import mdui from 'mdui';
 import yiyan from './json/yiyan.json';
 import './css/main.css';
 
-interface DialConfig {
-    icon?: string;
-    color?: string;
-    fn?: () => void;
-}
-
-interface FabChangeOptions {
-    closeIcon: string;
-    openIcon: string;
-
-    dial: DialConfig[];
-}
-
 let $ = mdui.$;
 
 // vercel预先构建警告
@@ -89,13 +76,13 @@ let page: any = {
          * @param {string} [opts.dial[].color=''] - 拨号按钮颜色
          * @param {Function} opts.dial[].fn - 拨号按钮点击后执行的函数
          */
-        fab_change(opts: FabChangeOptions) {
+        fab_change(opts: { closeIcon: string; openIcon: string; dial: [string?, string?, Function?][] }) {
             let { closeIcon = 'add', openIcon = 'close', dial } = opts;
             $('#fab-wrapper i').eq(0).text(closeIcon);
             $('#fab-wrapper i').eq(1).text(openIcon);
             $('#fab-dial').text('');
-            dial.forEach(({ icon, color, fn = function () {} }, index) => {
-                // let {icon:string, color:string, fn:Function} = config;
+            dial.forEach((config: [string?, string?, Function?], index: number) => {
+                let [icon, color, fn = () => {}] = config;
                 $('#fab-dial').append(
                     `<button class="mdui-fab mdui-fab-mini mdui-ripple ${color ? 'mdui-color-' + color : ''}">` +
                         `<i class="mdui-icon material-icons">${icon || 'touch_app'}</i></button>`,
@@ -116,9 +103,9 @@ let page: any = {
              * @return {string} 生成的时间文本
              */
             timeTextDiy: function (style: string = '{年}/{月}/{日} {时}:{分}:{秒}', time: Date = new Date()): string {
-                let god = new Date(time);
-                let DIZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
-                let HANZI = ['天', '一', '二', '三', '四', '五', '六'];
+                let god: Date = new Date(time);
+                let DIZHI: string[] = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
+                let HANZI: string[] = ['天', '一', '二', '三', '四', '五', '六'];
                 let type: any = {
                     年: god.getFullYear().toString(),
                     月: (god.getMonth() + 1).toString(),
@@ -162,7 +149,7 @@ let page: any = {
              * @return {string | void} 时间未过则返回'剩余分钟:剩余时间', 时间已过则无返回
              */
             getTimeDiff: function (time: number): string | void {
-                let diff = new Date(time).getTime() - new Date().getTime();
+                let diff: number = new Date(time).getTime() - new Date().getTime();
                 // console.log('diff', diff);
                 return diff < 0
                     ? void 0
@@ -210,7 +197,7 @@ let page: any = {
              */
             next: function (targetDOM: string, delay: number) {
                 // 浅拷贝
-                let i = this.instances[targetDOM];
+                let i: any = this.instances[targetDOM];
                 clearInterval(i.interval);
                 delete i.interval;
 
@@ -221,12 +208,12 @@ let page: any = {
                     ++i.status;
                 }
                 console.log('status', i.status);
-                let nextStatus =
+                let nextStatus: number =
                     (i.status === 2 && i.settings.long_break === void 0) || i.status === 3 ? 1 : i.status + 1;
-                let phase = ['Error', 'pomodoro', 'short_break', 'long_break'];
-                let phaseName = ['初始化', '专注时间', '休息时间', '长休息时间'];
+                let phase: string[] = ['Error', 'pomodoro', 'short_break', 'long_break'];
+                let phaseName: string[] = ['初始化', '专注时间', '休息时间', '长休息时间'];
                 $(targetDOM).eq(0).text(phaseName[i.status]);
-                let time = new Date().getTime() + i.settings[phase[i.status]] * 1000 * 60;
+                let time: number = new Date().getTime() + i.settings[phase[i.status]] * 1000 * 60;
                 $(targetDOM)
                     .eq(2)
                     .text('下一阶段: ' + phaseName[nextStatus]);
@@ -261,7 +248,7 @@ let page: any = {
 $('#button-menu').on('click', () => page.drawer.dom.toggle());
 
 // 右上角mdui menu主题色更换按钮
-let darkModeState = window.matchMedia('(prefers-color-scheme:dark)').matches;
+let darkModeState: boolean = window.matchMedia('(prefers-color-scheme:dark)').matches;
 $('#theme-changer').on('click', () => {
     if ($('body').hasClass('mdui-theme-layout-auto')) $('body').removeClass('mdui-theme-layout-auto');
     if (darkModeState) {
@@ -277,14 +264,14 @@ $('#theme-changer').on('click', () => {
 });
 
 //* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
-page.name.forEach((element: string, index: string) => {
+page.name.forEach((element: string, index: number) => {
     $('.mdui-list').append(
         `${
             page.drawer.subheader[element]
                 ? '<div class="mdui-subheader">' + page.drawer.subheader[element] + '</div>'
                 : ''
-        } `,
-        `<a class="mdui-list-item mdui-ripple" id="link-${element}">` +
+        } ` +
+            `<a class="mdui-list-item mdui-ripple" id="link-${element}">` +
             `<i class="mdui-list-item-icon mdui-icon material-icons">${page.config[element].icon}</i>` +
             `<div class="mdui-list-item-content">${page.config[element].title}</div></a> `,
     );
@@ -299,10 +286,11 @@ page.name.forEach((element: string, index: string) => {
  * 页面功能声明区 起
  */
 //* 页面切换 逻辑
-$('#page-changer').on('change.mdui.tab', event => {
+$('#page-changer').on('change.mdui.tab', (event: Event) => {
     //默认隐藏fab
     page.fab.hide();
     page.fn.clock.stop();
+    // 根据mdui文档, 这里的event._detail绝对存在
     switch ((event as any)._detail.index) {
         case 1:
             page.fab.show();
@@ -316,8 +304,8 @@ $('#page-changer').on('change.mdui.tab', event => {
 //* 测试区 起
 // 测试用功能:
 page.fn.fab_change({
-    close: 'add',
-    open: 'close',
+    closeIcon: 'add',
+    openIcon: 'close',
     dial: [
         ['backup', 'pink'],
         ['bookmark', 'red'],
@@ -369,7 +357,7 @@ $('#page-pomodoro-timer-options input')
         $('#page-pomodoro-timer-options .mdui-textfield').eq(2).removeClass('mdui-textfield-invalid');
     });
 $('#button-pomodoro-timer-start').on('click', () => {
-    let hasError = false;
+    let hasError: boolean = false;
     [0, 1, 2].forEach(element => {
         let warning = $('#page-pomodoro-timer-options .mdui-textfield-error').eq(element);
         let input = $('#page-pomodoro-timer-options input').eq(element);
@@ -390,9 +378,9 @@ $('#button-pomodoro-timer-start').on('click', () => {
     if (!hasError) {
         let input = $('#page-pomodoro-timer-options input');
         let settings = {
-            pomodoro: Number(input.eq(0).val()),
-            short_break: Number(input.eq(1).val()),
-            long_break: Number(input.eq(2).val()),
+            pomodoro: Number(input.eq(0).val() as string),
+            short_break: Number(input.eq(1).val() as string),
+            long_break: Number(input.eq(2).val() as string),
         };
 
         // 倒计时
