@@ -25,7 +25,7 @@ if (window.location.host === 'self-study-kit.vercel.app') {
 
 /**
  * @description: 随机生成一定范围的整数
- * @param {Number} min - 最小值, 整数,默认为
+ * @param {Number} min - 最小值, 整数
  * @param {Number} max - 最大值, 整数
  * @return {Number} 随机生成的整数
  */
