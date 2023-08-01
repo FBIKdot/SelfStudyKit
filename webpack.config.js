@@ -78,7 +78,8 @@ module.exports = {
                 test: /\.(json|html)$/i,
                 type: 'asset/resource',
             },
-            {
+            // ts 不需要使用babel-loader
+            /* {
                 test: /\.js$/,
                 exclude: /node-module/,
                 use: {
@@ -87,7 +88,7 @@ module.exports = {
                         presets: ['@babel/preset-env'],
                     },
                 },
-            },
+            }, */
         ],
     },
 };
