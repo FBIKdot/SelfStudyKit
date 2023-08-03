@@ -73,11 +73,9 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node-module/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
+                loader: 'esbuild-loader',
+                options: {
+                    target: 'es2015',
                 },
             },
         ],
