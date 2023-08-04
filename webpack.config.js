@@ -1,7 +1,6 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); //暂时弃用
 const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
@@ -32,12 +31,6 @@ module.exports = {
                     mangle: true,
                 },
             }),
-            // new UglifyJsPlugin({
-            //     uglifyOptions: {
-            //         compress: true,
-            //         mangle: true,
-            //     },
-            // }),
         ],
     },
     plugins: [
@@ -66,8 +59,9 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                use: 'ts-loader',
+                test: /\.(ts|js)$/,
+                // use: 'ts-loader', // esbuild-loader 更快, 但是如果有*.d.ts就得完善配置
+                use: 'esbuild-loader',
                 exclude: /node_modules/,
             },
             {
@@ -78,15 +72,6 @@ module.exports = {
                 test: /\.(json|html)$/i,
                 type: 'asset/resource',
             },
-            // ts 不需要使用babel-loader
-            /* {
-                test: /\.js$/,
-                exclude: /node-module/,
-                loader: 'esbuild-loader',
-                options: {
-                    target: 'es2015',
-                },
-            }, */
         ],
     },
 };
