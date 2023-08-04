@@ -58,7 +58,7 @@ yarn build-production
 
 -   [ ] PWA Support
 -   [ ] 番茄钟多项预设置支持
--   [ ] Refactoring with TypeScript
+-   [x] Refactoring with TypeScript
 
 **Desktop version**
 
