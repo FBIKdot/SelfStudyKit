@@ -6,13 +6,16 @@ const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
     // devtool: 'inline-source-map',
-    entry: './src/index.js',
+    entry: './src/index.ts',
     // watch: true,
     output: {
         path: path.join(__dirname, 'dist'),
         // publicPath: '/dist/',
         filename: 'index.js',
         // chunkFilename: '[name].js'
+    },
+    resolve: {
+        extensions: ['.ts', '.js', '.json'],
     },
     //* webpack开发服务器. 它不会自动更新html, 所以我更推荐启用watch然后使用Live Server --FBIK.
     devServer: {
@@ -63,6 +66,11 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
+                exclude: /node_modules/,
+            },
+            {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
             },
@@ -70,14 +78,15 @@ module.exports = {
                 test: /\.(json|html)$/i,
                 type: 'asset/resource',
             },
-            {
+            // ts 不需要使用babel-loader
+            /* {
                 test: /\.js$/,
                 exclude: /node-module/,
                 loader: 'esbuild-loader',
                 options: {
                     target: 'es2015',
                 },
-            },
+            }, */
         ],
     },
 };
