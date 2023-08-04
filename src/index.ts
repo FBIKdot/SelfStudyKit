@@ -6,7 +6,6 @@
  */
 import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';
-import yiyan from './json/yiyan.json';
 import './css/main.css';
 
 let $ = mdui.$;
@@ -326,14 +325,16 @@ page.changer.show(3);
 //* 首页 index
 
 // 一言
-// ! 也许是因为webpack没用json-loader导入json, 不用<any>断言yiyan会报错. 在JS中运行是完全没问题的, 可能与隐式转换有关, 就交给JS了(
-fetch(<any>yiyan)
+
+// ! 暂时取消一言
+// 也许是因为webpack没用json-loader导入json, 不用<any>断言yiyan会报错. 在JS中运行是完全没问题的, 可能与隐式转换有关, 就交给JS了(
+/* fetch(<any>yiyan)
     .then(response => response.json())
     .then(data => $('#yiyan').text(data[randomInt(0, data.length)]))
     .catch(error => {
         console.error('一言读取出现错误:', error);
     });
-
+ */
 //* 欢迎使用 welcome
 
 new mdui.Tooltip('#tooltip-番茄工作法', {
