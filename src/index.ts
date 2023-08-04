@@ -6,6 +6,7 @@
  */
 import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';
+// import yiyan from './json/yiyan.json'
 import './css/main.css';
 
 let $ = mdui.$;
