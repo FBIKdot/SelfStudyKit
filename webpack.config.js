@@ -5,7 +5,7 @@ const HtmlMinifierPlugin = require('html-minifier').minify;
 module.exports = {
     mode: 'development',
     // devtool: 'inline-source-map',
-    entry: './src/index.ts',
+    entry: ['./src/index.ts', './src/main.js'],
     // watch: true,
     output: {
         path: path.join(__dirname, 'dist'),

@@ -244,6 +244,9 @@ let page: any = {
         },
     },
 };
+
+export default page;
+
 // 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
 $('#button-menu').on('click', () => page.drawer.dom.toggle());
 
