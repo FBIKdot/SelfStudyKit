@@ -178,7 +178,8 @@ let page: any = {
             ) {
                 this.instances[targetDOM] = {
                     status: 0,
-                    turn: 0,
+                    counter: 0,
+                    break_turn: 0,
                     settings: {
                         pomodoro: pomodoro_time,
                         short_break: short_break_time,
@@ -202,14 +203,61 @@ let page: any = {
                 delete i.interval;
 
                 console.log('status', i.status);
-                if ((i.status === 2 && i.settings.long_break === void 0) || i.status === 3) {
+                /* if ((i.status === 2 && i.settings.long_break === void 0) || i.status === 3) {
                     i.status = 1;
                 } else {
                     ++i.status;
-                }
+                } */
+                /* i.status = i.status === 2 ? 1 : 2;
                 console.log('status', i.status);
-                let nextStatus: number =
-                    (i.status === 2 && i.settings.long_break === void 0) || i.status === 3 ? 1 : i.status + 1;
+                let nextStatus = i.status === 1 ? 2 : 1;
+                this.instances[targetDOM].turn */
+                /*
+                 * 如果为休息时间, 则根据循环次数trun判断示范应为长休息时间
+                 ! 这里的i.status是上次的状态, 不是这次!
+                 */
+                let nextStatus: number = 0;
+                switch (i.status) {
+                    // 如果上次是1
+
+                    case 1:
+                        // 这次是2或3
+                        // 这里break_turn是没自增的, 方便阅读写+1
+                        if (i.break_turn + 1 === 4) {
+                            // 这次第4个休息, 也就是长休息了
+                            i.status = 3;
+                            i.break_turn = 0;
+
+                            nextStatus = 1;
+                        } else {
+                            // 正常
+                            i.status = 2;
+                            ++i.break_turn;
+
+                            nextStatus = 1;
+                        }
+
+                        break;
+                    // 如果上次是2, 或者3, 或没有上次
+                    case 0:
+                    case 2:
+                    case 3:
+                        // 这次是1
+                        if (i.break_turn + 1 === 4) {
+                            // 这次第4个专注, 下次长休息
+                            i.status = 1;
+                            ++i.counter;
+
+                            nextStatus = 3;
+                        } else {
+                            i.status = 1;
+                            ++i.counter;
+
+                            nextStatus = 2;
+                        }
+                        break;
+                }
+
                 let phase: string[] = ['Error', 'pomodoro', 'short_break', 'long_break'];
                 let phaseName: string[] = ['初始化', '专注时间', '休息时间', '长休息时间'];
                 $(targetDOM).eq(0).text(phaseName[i.status]);
@@ -220,7 +268,7 @@ let page: any = {
                 $(targetDOM)
                     .eq(1)
                     .text(this.getTimeDiff(time)?.toString() || 'Error');
-                this.instances[targetDOM].interval = setInterval(() => {
+                i.interval = setInterval(() => {
                     this.getTimeDiff(time)
                         ? $(targetDOM)
                               .eq(1)
