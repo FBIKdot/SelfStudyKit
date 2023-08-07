@@ -93,7 +93,6 @@ let page: any = {
                         fn();
                     });
             });
-            // console.log('page.fn.fab_change:', closeIcon, openIcon, dial);
         },
         clock: {
             /**
@@ -203,27 +202,19 @@ let page: any = {
                 delete i.interval;
 
                 console.log('status', i.status);
-                /* if ((i.status === 2 && i.settings.long_break === void 0) || i.status === 3) {
-                    i.status = 1;
-                } else {
-                    ++i.status;
-                } */
-                /* i.status = i.status === 2 ? 1 : 2;
-                console.log('status', i.status);
-                let nextStatus = i.status === 1 ? 2 : 1;
-                this.instances[targetDOM].turn */
                 /*
-                 * 如果为休息时间, 则根据循环次数trun判断示范应为长休息时间
+                 * 如果为休息时间, 则根据循环次数turn判断示范应为长休息时间
                  ! 这里的i.status是上次的状态, 不是这次!
                  */
                 let nextStatus: number = 0;
+                let hasLongBreak: boolean = $('#page-pomodoro-timer-options input').eq(3).prop('checked');
                 switch (i.status) {
                     // 如果上次是1
-
                     case 1:
                         // 这次是2或3
                         // 这里break_turn是没自增的, 方便阅读写+1
-                        if (i.break_turn + 1 === 4) {
+                        console.log('hasLongBreak', hasLongBreak);
+                        if (i.break_turn + 1 === 4 && hasLongBreak) {
                             // 这次第4个休息, 也就是长休息了
                             i.status = 3;
                             i.break_turn = 0;
@@ -243,7 +234,7 @@ let page: any = {
                     case 2:
                     case 3:
                         // 这次是1
-                        if (i.break_turn + 1 === 4) {
+                        if (i.break_turn + 1 === 4 && hasLongBreak) {
                             // 这次第4个专注, 下次长休息
                             i.status = 1;
                             ++i.counter;
@@ -406,7 +397,7 @@ $('#page-pomodoro-timer-options input')
             .attr('disabled', !checked ? 'true' : null);
         $('#page-pomodoro-timer-options label')
             .eq(2)
-            .text(checked ? '长休息时间' : '已关闭 长休息时间');
+            .text(checked ? '长休息时间 (秒)' : '已关闭 长休息时间 (秒)');
         $('#page-pomodoro-timer-options .mdui-textfield').eq(2).removeClass('mdui-textfield-invalid');
     });
 $('#button-pomodoro-timer-start').on('click', () => {
@@ -415,14 +406,13 @@ $('#button-pomodoro-timer-start').on('click', () => {
         let warning = $('#page-pomodoro-timer-options .mdui-textfield-error').eq(element);
         let input = $('#page-pomodoro-timer-options input').eq(element);
         let textfield = $('#page-pomodoro-timer-options .mdui-textfield').eq(element);
-        if (
-            /^[1-9]|[1-5]\d$/.test(input.val()?.toString() || '') ||
-            (element === 2 && !$('#page-pomodoro-timer-options input').eq(3).prop('checked'))
-        ) {
+        let hasLongBreak: boolean = $('#page-pomodoro-timer-options input').eq(3).prop('checked');
+        // 判断是否为正整数
+        if (/^[1-9]|[1-5]\d$/.test(input.val()?.toString() || '') || (element === 2 && !hasLongBreak)) {
             warning.text('');
             textfield.removeClass('mdui-textfield-invalid');
         } else {
-            warning.text('内容必须为正整数');
+            warning.text('内容必须为不超过60的正整数');
             hasError = true;
             textfield.addClass('mdui-textfield-invalid');
         }
