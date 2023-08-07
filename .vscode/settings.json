@@ -26,5 +26,12 @@
     "[typescript]": {
         "editor.rulers": [120],
         "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "package.json": "package-lock.json,yarn.lock,.gitignore,.prettierignore,.prettierrc.js,LICENSE,tsconfig.json"
+    },
+    "files.exclude": {
+        ".idea": true,
     }
 }
