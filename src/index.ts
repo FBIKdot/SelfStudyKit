@@ -307,7 +307,7 @@ $('#theme-changer').on('click', () => {
 
 //* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
 page.name.forEach((element: string, index: number) => {
-    $('.mdui-list').append(
+    $('#drawer-list').append(
         `${
             page.drawer.subheader[element]
                 ? '<div class="mdui-subheader">' + page.drawer.subheader[element] + '</div>'
@@ -362,7 +362,7 @@ page.fn.fab_change({
     ],
 });
 // 临时用于切换到默认页面
-page.changer.show(3);
+page.changer.show(4);
 //* 测试区 终
 
 //* 首页 index
@@ -454,6 +454,9 @@ $('#button-pomodoro-timer-stop').on('click', () => {
         ],
     });
 });
+
+//*设置
+
 /*
  * 页面功能声明区 终
  */

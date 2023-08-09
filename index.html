@@ -35,7 +35,7 @@
 
         <!-- mdui侧边栏 -->
         <div class="mdui-drawer mdui-shadow-6 mdui-drawer-close" id="drawer">
-            <div class="mdui-list"></div>
+            <div class="mdui-list" id="drawer-list"></div>
         </div>
 
         <!-- 一个隐藏的mdui tab选项卡, 使用js调用来切换选项卡. 用于实现页面切换 -->
@@ -164,7 +164,29 @@
         <!-- <div id="page-word-notepad" class="mdui-typo">单词本 待开发</div> -->
 
         <!-- 设置 -->
-        <div id="page-settings" class="mdui-typo">设置 待开发</div>
+        <div id="page-settings" class="mdui-typo mdui-container">
+            <div class="mdui-list">
+                <div class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">color_lens</i>
+                    <div class="mdui-list-item-content">
+                        <div class="mdui-list-item-title">主题颜色</div>
+                        <div class="mdui-list-item-text">SelfStudyKit页面的主题颜色, 默认为系统默认</div>
+                    </div>
+                    <button
+                        class="mdui-btn mdui-btn-icon"
+                        id="settings-theme-change"
+                        mdui-menu="{target: '#settings-theme-changer-menu'}"
+                    >
+                        <i class="mdui-icon material-icons">chat_bubble</i>
+                    </button>
+                    <ul class="mdui-menu" id="settings-theme-changer-menu">
+                        <li class="mdui-menu-item">
+                            <a href="javascript:;" class="mdui-ripple">Black</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
         <script src="./index.js"></script>
     </body>
