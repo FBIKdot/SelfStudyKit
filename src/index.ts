@@ -6,7 +6,6 @@
  */
 import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';
-// import yiyan from './json/yiyan.json'
 import './css/main.css';
 
 let $ = mdui.$;
@@ -66,6 +65,14 @@ let page: any = {
     fab: new mdui.Fab('#fab-wrapper'),
     pomodoro_timer: {
         changer: new mdui.Tab('#page-pomodoro-timer-page-changer'),
+    },
+    yiyan: {
+        api: [
+            // 使用 古诗词·一言 api: https://github.com/xenv/gushici
+            '//v1.jinrishici.com/rensheng/lizhi.json', // 人生-励志
+            '//v1.jinrishici.com/rensheng/zheli.json', // 人生-哲理
+            '//v1.jinrishici.com/rensheng/dushu.json', //人生-读书
+        ],
     },
     fn: {
         /**
@@ -362,7 +369,7 @@ page.fn.fab_change({
     ],
 });
 // 临时用于切换到默认页面
-page.changer.show(4);
+page.changer.show(0);
 //* 测试区 终
 
 //* 首页 index
@@ -371,13 +378,15 @@ page.changer.show(4);
 
 // ! 暂时取消一言
 // 也许是因为webpack没用json-loader导入json, 不用<any>断言yiyan会报错. 在JS中运行是完全没问题的, 可能与隐式转换有关, 就交给JS了(
-/* fetch(<any>yiyan)
+console.log('一言api: ', page.yiyan.api[randomInt(0, page.yiyan.api.length - 1)]);
+fetch(page.yiyan.api[randomInt(0, page.yiyan.api.length - 1)])
     .then(response => response.json())
-    .then(data => $('#yiyan').text(data[randomInt(0, data.length)]))
+    // .then(data => console.log(data))
+    .then(data => $('#yiyan').text(`“ ${data.content}” —— ${data.author} 《${data.origin}》`))
     .catch(error => {
         console.error('一言读取出现错误:', error);
     });
- */
+
 //* 欢迎使用 welcome
 
 new mdui.Tooltip('#tooltip-番茄工作法', {
