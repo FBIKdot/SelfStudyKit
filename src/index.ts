@@ -74,6 +74,9 @@ let page: any = {
             '//v1.jinrishici.com/rensheng/dushu.json', //人生-读书
         ],
     },
+    settings: {
+        panel: new mdui.Panel('#page-settings-panel'),
+    },
     fn: {
         /**
          * @description 根据传入的参数更改 fab-wrapper 的外观与功能
@@ -369,7 +372,7 @@ page.fn.fab_change({
     ],
 });
 // 临时用于切换到默认页面
-page.changer.show(0);
+page.changer.show(4);
 //* 测试区 终
 
 //* 首页 index
@@ -465,7 +468,13 @@ $('#button-pomodoro-timer-stop').on('click', () => {
 });
 
 //*设置
-
+$('#page-settings-panel .mdui-panel-item')
+    .get()
+    .forEach(element => {
+        $(element).on('click', () => {
+            page.settings.panel.open($(element));
+        });
+    });
 /*
  * 页面功能声明区 终
  */

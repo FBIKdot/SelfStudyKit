@@ -165,25 +165,39 @@
 
         <!-- 设置 -->
         <div id="page-settings" class="mdui-typo mdui-container">
-            <div class="mdui-list">
-                <div class="mdui-list-item mdui-ripple">
-                    <i class="mdui-list-item-icon mdui-icon material-icons">color_lens</i>
-                    <div class="mdui-list-item-content">
-                        <div class="mdui-list-item-title">主题颜色</div>
-                        <div class="mdui-list-item-text">SelfStudyKit页面的主题颜色, 默认为系统默认</div>
+            <div class="mdui-container">
+                <div class="mdui-container-fluid">
+                    <div class="mdui-panel" mdui-panel id="page-settings-panel">
+                        <div class="mdui-panel-item mdui-panel-item-open">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">基本设置</div>
+                            </div>
+                            <div class="mdui-panel-item-body">
+                                <div class="mdui-checkbox">
+                                    <label>
+                                        <input type="checkbox" />
+                                        <i class="mdui-checkbox-icon"></i>
+                                        夜间模式
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mdui-panel-item mdui-panel-item-open">
+                            <div class="mdui-panel-item-header">
+                                <div class="mdui-panel-item-title">其他设置</div>
+                            </div>
+                            <div class="mdui-panel-item-body">
+                                <div class="mdui-radio">
+                                    <label>
+                                        <input type="radio" name="radio-group" />
+                                        <i class="mdui-radio-icon"></i>
+                                        选项1
+                                    </label>
+                                </div>
+                                <!-- 其他高级设置选项 -->
+                            </div>
+                        </div>
                     </div>
-                    <button
-                        class="mdui-btn mdui-btn-icon"
-                        id="settings-theme-change"
-                        mdui-menu="{target: '#settings-theme-changer-menu'}"
-                    >
-                        <i class="mdui-icon material-icons">chat_bubble</i>
-                    </button>
-                    <ul class="mdui-menu" id="settings-theme-changer-menu">
-                        <li class="mdui-menu-item">
-                            <a href="javascript:;" class="mdui-ripple">Black</a>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
