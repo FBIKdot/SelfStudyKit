@@ -1,8 +1,9 @@
 # SelfStudyKit
 
-# :warning:此项目的最初版本未完成. 如果你对这个项目有兴趣, 可以启用 watch 勾选 Releases 以便让 Github 在每次 Release 时进行通知.
-
 基于 [MDUI](https://github.com/zdhxiong/mdui) 的纯前端自习辅助工具集.
+
+[![License](https://img.shields.io/github/license/BovineBeta/SelfStudyKit?color=blue)](https://github.com/BovineBeta/SelfStudyKit)
+![Version](https://img.shields.io/github/v/release/BovineBeta/SelfStudyKit?color=green)
 
 # Feature
 
@@ -50,9 +51,9 @@ yarn build-production
 -   [x] 主页
 -   [x] 一言
 -   [x] 时钟
--   [ ] 番茄钟
+-   [x] 番茄钟
 -   [ ] 单词本
--   [ ] 设置
+-   [x] 设置
 
 **Plus**
 
