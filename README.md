@@ -3,7 +3,7 @@
 基于 [MDUI](https://github.com/zdhxiong/mdui) 的纯前端自习辅助工具集.
 
 [![License](https://img.shields.io/github/license/BovineBeta/SelfStudyKit?color=blue)](https://github.com/BovineBeta/SelfStudyKit)
-![Version](https://img.shields.io/github/v/release/BovineBeta/SelfStudyKit?color=green)
+[![GitHub release](https://img.shields.io/github/v/release/BovineBeta/SelfStudyKit)](https://github.com/BovineBeta/SelfStudyKit/releases)
 
 # Feature
 
@@ -65,3 +65,7 @@ yarn build-production
 
 -   [ ] Niva Support
 -   [ ] Electron build (low priority)
+
+# License
+
+SelfStudy 遵循 GPL-3.0 协议.
