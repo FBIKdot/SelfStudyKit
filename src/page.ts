@@ -1,5 +1,6 @@
 import mdui from 'mdui';
 import 'mdui/dist/css/mdui.css';
+import { getCookie, setCookie } from 'typescript-cookie';
 
 let $ = mdui.$;
 
@@ -35,6 +36,19 @@ interface Page {
         panel: any; // mdui.Panel
     };
     fn: {
+        /**
+         * @description 更改主题色
+         * @param {string} status 主题色
+         */
+        theme_changer: (status: string) => void;
+        /**
+         * @description 根据传入的参数更改 fab-wrapper 的外观与功能
+         * @param {string} opts.close - fab 关闭时显示的图标
+         * @param {string} opts.open - fab 打开时显示的图标
+         * @param {string} [opts.dial[].icon='touch_app'] - 拨号按钮图标
+         * @param {string} [opts.dial[].color=''] - 拨号按钮颜色
+         * @param {Function} opts.dial[].fn - 拨号按钮点击后执行的函数
+         */
         fab_change: (opts: { closeIcon: string; openIcon: string; dial: [string?, string?, Function?][] }) => void;
         clock: {
             /**
@@ -149,6 +163,11 @@ let page: Page = {
         panel: new mdui.Panel('#page-settings-panel'),
     },
     fn: {
+        theme_changer(status: string) {
+            setCookie('theme', status);
+            $('body').removeClass('mdui-theme-layout-auto mdui-theme-layout-light mdui-theme-layout-dark');
+            $('body').addClass(`mdui-theme-layout-${status}`);
+        },
         /**
          * @description 根据传入的参数更改 fab-wrapper 的外观与功能
          * @param {string} opts.close - fab 关闭时显示的图标

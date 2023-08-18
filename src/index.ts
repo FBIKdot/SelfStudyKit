@@ -1,5 +1,5 @@
 /*!
- * SelfStudyKit v0.0.1 - 基于mdui的纯前端自习辅助工具集.
+ * SelfStudyKit v1.0.0 - 基于mdui的纯前端自习辅助工具集.
  * https://github.com/BovineBeta/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
  * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE
@@ -8,16 +8,9 @@ import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';
 import './css/main.css';
 import page from './page';
+import { getCookie, setCookie } from 'typescript-cookie';
 
 let $ = mdui.$;
-
-// vercel预先构建警告
-if (window.location.host === 'self-study-kit.vercel.app') {
-    console.warn(` * SelfStudyKit v0.x 未开发完成 - 基于mdui的纯前端自习辅助工具集.
- * https://github.com/BovineBeta/SelfStudyKit
- * Copyright (C) 2023 FBIK <fbik@fbik.top>
- * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE`);
-}
 
 /**
  * @description: 随机生成一定范围的整数
@@ -33,7 +26,7 @@ const randomInt = (min: number, max: number): number => Math.floor(Math.random()
 // 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
 $('#button-menu').on('click', () => page.drawer.dom.toggle());
 
-// 右上角mdui menu主题色更换按钮
+/* // 右上角mdui menu主题色更换按钮
 let darkModeState: boolean = window.matchMedia('(prefers-color-scheme:dark)').matches;
 $('#theme-changer').on('click', () => {
     if ($('body').hasClass('mdui-theme-layout-auto')) $('body').removeClass('mdui-theme-layout-auto');
@@ -47,7 +40,7 @@ $('#theme-changer').on('click', () => {
         $('#theme-changer-icon').text('brightness_3');
     }
     darkModeState = !darkModeState;
-});
+}); */
 
 //* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
 page.name.forEach((element: string, index: number) => {
@@ -72,6 +65,10 @@ page.name.forEach((element: string, index: number) => {
  * 页面功能声明区 起
  */
 //* 页面切换 逻辑
+page.changer.show(Number(getCookie('page')));
+if (getCookie('page') === '2') {
+    page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
+}
 $('#page-changer').on('change.mdui.tab', (event: Event) => {
     //默认隐藏fab
     page.fab.hide();
@@ -85,6 +82,8 @@ $('#page-changer').on('change.mdui.tab', (event: Event) => {
             page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
             break;
     }
+    setCookie('page', (event as any)._detail.index.toString());
+    console.log((event as any)._detail.index.toString());
 });
 
 //* 测试区 起
@@ -106,7 +105,7 @@ page.fn.fab_change({
     ],
 });
 // 临时用于切换到默认页面
-page.changer.show(4);
+
 //* 测试区 终
 
 //* 首页 index
@@ -199,6 +198,10 @@ $('#button-pomodoro-timer-stop').on('click', () => {
 });
 
 //*设置
+// Cookie
+let themeStatus: string = getCookie('theme') || 'auto';
+page.fn.theme_changer(themeStatus);
+
 $('#page-settings-panel .mdui-panel-item')
     .get()
     .forEach(element => {
@@ -206,6 +209,17 @@ $('#page-settings-panel .mdui-panel-item')
             page.settings.panel.open($(element));
         });
     });
+
+// 勾选当前主题色
+$(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
+
+// 应用主题色
+$('#page-settings-theme-apply').on('click', () => {
+    themeStatus = $('input[name="主题色"]:checked').val() as string;
+    page.fn.theme_changer(themeStatus);
+    $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
+});
+
 /*
  * 页面功能声明区 终
  */

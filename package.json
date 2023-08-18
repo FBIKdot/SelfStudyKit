@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/BovineBeta/SelfStudyKit#readme",
   "dependencies": {
-    "mdui": "^1.0.2"
+    "mdui": "^1.0.2",
+    "typescript-cookie": "^1.0.6"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",

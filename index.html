@@ -18,7 +18,7 @@
                 <a href="javascript:;" class="mdui-typo-title">首页</a>
                 <div class="mdui-toolbar-spacer"></div>
 
-                <button href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#right-menu'}">
+                <!-- <button href="javascript:;" class="mdui-btn mdui-btn-icon" mdui-menu="{target: '#right-menu'}">
                     <i class="mdui-icon material-icons">more_vert</i>
                 </button>
                 <ul class="mdui-menu" id="right-menu">
@@ -29,7 +29,7 @@
                             ><span>切换主题颜色</span>
                         </a>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
 
@@ -68,7 +68,7 @@
         <!-- 欢迎使用 -->
         <div id="page-welcome" class="mdui-typo mdui-container">
             <h1>欢迎使用 Self Study Kit !</h1>
-            <div>Self Study Kit 是一个基于H5的自习辅助工具集.</div>
+            <div>Self Study Kit 是一个基于mdui的纯前端自习辅助工具集.</div>
             <h1>工具大全</h1>
             <div>
                 时间管理
@@ -82,8 +82,8 @@
                     >"番茄工作法"</a
                 >
                 的倒计时工具, 可用于协调自己在学习间的休息时间.
-                <h2>单词本</h2>
-                一个记录不熟悉单词的工具, 可以用于辅助背记单词.
+                <!-- <h2>单词本</h2>
+                一个记录不熟悉单词的工具, 可以用于辅助背记单词. -->
             </div>
         </div>
 
@@ -172,29 +172,69 @@
                             <div class="mdui-panel-item-header">
                                 <div class="mdui-panel-item-title">基本设置</div>
                             </div>
-                            <div class="mdui-panel-item-body">
-                                <div class="mdui-checkbox">
-                                    <label>
-                                        <input type="checkbox" />
-                                        <i class="mdui-checkbox-icon"></i>
-                                        夜间模式
-                                    </label>
+                            <div class="mdui-panel-item-body" id="page-settings-theme">
+                                <div class="mdui-row">
+                                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                                        <div class="mdui-radio">
+                                            <label>
+                                                <input type="radio" name="主题色" value="auto" />
+                                                <i class="mdui-radio-icon"></i>
+                                                自动
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                                        <div class="mdui-radio">
+                                            <label>
+                                                <input type="radio" name="主题色" value="light" />
+                                                <i class="mdui-radio-icon"></i>
+                                                明亮
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="mdui-col-xs-6 mdui-col-sm-4">
+                                        <div class="mdui-radio">
+                                            <label>
+                                                <input type="radio" name="主题色" value="dark" />
+                                                <i class="mdui-radio-icon"></i>
+                                                黑暗
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
+                                <button class="mdui-btn mdui-btn-raised mdui-ripple" id="page-settings-theme-apply">
+                                    应用
+                                </button>
                             </div>
                         </div>
                         <div class="mdui-panel-item mdui-panel-item-open">
                             <div class="mdui-panel-item-header">
-                                <div class="mdui-panel-item-title">其他设置</div>
+                                <div class="mdui-panel-item-title">关于 Self Study Kit</div>
                             </div>
                             <div class="mdui-panel-item-body">
-                                <div class="mdui-radio">
-                                    <label>
-                                        <input type="radio" name="radio-group" />
-                                        <i class="mdui-radio-icon"></i>
-                                        选项1
-                                    </label>
+                                <div class="mdui-typo">
+                                    SelfStudyKit v1.0.0<br />
+                                    Author:
+                                    <a href="https://github.com/BovineBeta" target="_blank" rel="noopener noreferrer"
+                                        >FBIK.</a
+                                    >
+                                    (a.k.a. Bovine Beta)<br /><br />
+                                    SelfStudy 遵循 GPL-3.0 协议在 Github 开源.<br />
+                                    Github Repository:
+                                    <a
+                                        href="https://github.com/BovineBeta/SelfStudyKit"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        >https://github.com/BovineBeta/SelfStudyKit</a
+                                    ><br />
+                                    如果在使用过程中遇到Bug, 欢迎
+                                    <a
+                                        href="https://github.com/BovineBeta/SelfStudyKit/issues"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        >Issues</a
+                                    >.
                                 </div>
-                                <!-- 其他高级设置选项 -->
                             </div>
                         </div>
                     </div>
