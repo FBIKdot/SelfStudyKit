@@ -1,6 +1,6 @@
 import mdui from 'mdui';
 import 'mdui/dist/css/mdui.css';
-import { getCookie, setCookie } from 'typescript-cookie';
+import { setCookie } from 'typescript-cookie';
 
 let $ = mdui.$;
 
@@ -163,6 +163,10 @@ let page: Page = {
         panel: new mdui.Panel('#page-settings-panel'),
     },
     fn: {
+        /**
+         * @description 更改主题色
+         * @param {string} status 主题色
+         */
         theme_changer(status: string) {
             setCookie('theme', status);
             $('body').removeClass('mdui-theme-layout-auto mdui-theme-layout-light mdui-theme-layout-dark');
