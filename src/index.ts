@@ -54,7 +54,15 @@ page.name.forEach((element: string, index: number) => {
             `<i class="mdui-list-item-icon mdui-icon material-icons">${page.config[element].icon}</i>` +
             `<div class="mdui-list-item-content">${page.config[element].title}</div></a> `,
     );
-    $('#link-' + element).on('click', () => page.changer.show(index));
+    $('#link-' + element).on('click', () => {
+        // 切换页面
+        page.changer.show(index);
+
+        // 根据屏幕宽度判断drawer是否启用遮罩, 如果是则在点击后关闭drawer
+        if ($(window).width() < 1024) {
+            page.drawer.dom.close();
+        }
+    });
 });
 
 /*
