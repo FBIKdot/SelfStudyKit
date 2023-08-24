@@ -14,33 +14,41 @@
 
 准备:
 
+本项目使用`yarn`进行包管理, 请确保安装好了`yarn`.
+
+```bash
+npm install -g yarn
+```
+
+拉取代码&安装依赖
+
 ```bash
 git clone https://github.com/BovineBeta/SelfStudyKit.git
 cd SelfStudyKit
-yarn # 或者 npm install
+yarn
 ```
 
 运行 webpack dev server:
 
-```
-yarn start # 或者 npm run start, 以此类推
+```bash
+yarn start
 ```
 
 开发模式构建:
 
-```
+```bash
 yarn build
 ```
 
 实时构建 (可搭配 vscode 扩展 live server 使用):
 
-```
+```bash
 yarn build-watch
 ```
 
 生产模式构建:
 
-```
+```bash
 yarn build-production
 ```
 
