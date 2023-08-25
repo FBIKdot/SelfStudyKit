@@ -84,7 +84,7 @@ $('#page-changer').on('change.mdui.tab', (event: Event) => {
     // 根据mdui文档, 这里的event._detail绝对存在
     switch ((event as any)._detail.index) {
         case 1:
-            page.fab.show();
+            // page.fab.show();
             break;
         case 2:
             page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
