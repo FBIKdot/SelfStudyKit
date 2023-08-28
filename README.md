@@ -65,14 +65,15 @@ yarn build-production
 
 **Plus**
 
--   [ ] PWA Support
+-   [ ] Support PWA
 -   [ ] 番茄钟多项预设置支持
 -   [x] Refactoring with TypeScript
 
 **Desktop version**
 
--   [ ] Niva Support
--   [ ] Electron build (low priority)
+-   [ ] Use [Niva](https://github.com/bramblex/niva)
+-   [ ] Use [mini-electron](https://github.com/weolar/miniblink49#mini-electron)
+-   [ ] Use Electron (low priority)
 
 # License
 
