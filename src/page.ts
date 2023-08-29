@@ -121,6 +121,7 @@ interface Page {
                 };
             };
         };
+        version_Check: () => void;
     };
 }
 // 页面内容配置
@@ -384,6 +385,22 @@ let page: Page = {
                 page.pomodoro_timer.changer.show(0);
             },
             instances: {} as any,
+        },
+        async version_Check() {
+            interface GithubApi {
+                tag_name: string;
+                prerelease: boolean;
+            }
+            const data: GithubApi[] | void = await fetch('//api.github.com/repos/BovineBeta/SelfStudyKit/releases')
+                .then(result => result.json())
+                .catch(err => console.warn(err));
+            if (data !== void 0) {
+                let lastVersion;
+                data.forEach((value: GithubApi, index: number) => {
+                    if (value['prerelease'] === false) {
+                    }
+                });
+            }
         },
     },
 };

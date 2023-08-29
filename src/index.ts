@@ -228,6 +228,8 @@ $('#page-settings-theme-apply').on('click', () => {
     $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
 });
 
+// 版本检查
+// page.fn.version_Check();
 /*
  * 页面功能声明区 终
  */
