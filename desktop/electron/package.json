@@ -2,5 +2,5 @@
     "name": "selfstudykit",
     "description": "基于 MDUI 的纯前端自习辅助工具集",
     "version": "1.0.3",
-    "main": "index.js"
+    "main": "electron.js"
 }

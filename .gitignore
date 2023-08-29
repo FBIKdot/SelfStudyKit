@@ -7,4 +7,4 @@ SDK
 desktop/build/*.asar
 desktop/build/*.exe
 desktop/build/*.zip
-desktop/build/asar/
+desktop/build/**/
