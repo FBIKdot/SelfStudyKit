@@ -35,9 +35,9 @@
 
 **Desktop version**
 
--   [ ] Use [Niva](https://github.com/bramblex/niva)
--   [ ] Use [mini-electron](https://github.com/weolar/miniblink49#mini-electron)
--   [ ] Use Electron (low priority)
+-   [x] Use [Niva](https://github.com/bramblex/niva)
+-   [x] Use [mini-electron](https://github.com/weolar/miniblink49#mini-electron)
+-   [x] Use Electron (`.asar` only)
 
 # 使用
 
