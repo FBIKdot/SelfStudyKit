@@ -1,0 +1,12 @@
+{
+    "name": "SelfStudyKit",
+    "uuid": "7c435554-1120-49fd-81de-c8413acbda58",
+    "window": {
+        "devtools": true,
+        "size": {
+            "width": 900,
+            "height": 600
+        },
+        "resizable": true
+    }
+}

@@ -58,6 +58,14 @@ module.exports = {
                 },
             ],
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: './desktop/niva/niva.json', // 输入文件
+                    to: 'niva.json', // 输出文件
+                },
+            ],
+        }),
         new CompressionPlugin({
             filename: '[base].gz',
             exclude: /index\.html$/,
