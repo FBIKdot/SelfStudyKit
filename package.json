@@ -1,39 +1,41 @@
 {
-  "name": "selfstudykit",
-  "description": "基于H5的纯前端自习辅助工具集",
-  "scripts": {
-    "build": "npx webpack",
-    "build-watch": "npx webpack --watch",
-    "build-production": "npx webpack --mode=production",
-    "start": "webpack serve"
-  },
-  "packageManager": "yarn@1.22.19",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BovineBeta/SelfStudyKit.git"
-  },
-  "author": "FBIK.",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/BovineBeta/SelfStudyKit/issues"
-  },
-  "homepage": "https://github.com/BovineBeta/SelfStudyKit#readme",
-  "dependencies": {
-    "mdui": "^1.0.2",
-    "typescript-cookie": "^1.0.6"
-  },
-  "devDependencies": {
-    "compression-webpack-plugin": "^10.0.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.8.1",
-    "esbuild-loader": "^3.1.0",
-    "html-minifier": "^4.0.0",
-    "style-loader": "^3.3.3",
-    "terser-webpack-plugin": "^5.3.9",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.1.6",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.15.1"
-  }
+    "name": "selfstudykit",
+    "description": "基于 MDUI 的纯前端自习辅助工具集",
+    "scripts": {
+        "build": "npx webpack",
+        "build-watch": "npx webpack --watch",
+        "build-production": "npx webpack --mode=production",
+        "start": "webpack serve",
+        "mini-electron:start": "./SDK/mini_electron/mini_electron.exe .",
+        "electron:start": "electron ./electron.js"
+    },
+    "packageManager": "yarn@1.22.19",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BovineBeta/SelfStudyKit.git"
+    },
+    "author": "FBIK.",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/BovineBeta/SelfStudyKit/issues"
+    },
+    "homepage": "https://github.com/BovineBeta/SelfStudyKit#readme",
+    "dependencies": {
+        "mdui": "^1.0.2",
+        "typescript-cookie": "^1.0.6"
+    },
+    "devDependencies": {
+        "compression-webpack-plugin": "^10.0.0",
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.8.1",
+        "esbuild-loader": "^3.1.0",
+        "html-minifier": "^4.0.0",
+        "style-loader": "^3.3.3",
+        "terser-webpack-plugin": "^5.3.9",
+        "ts-loader": "^9.4.4",
+        "typescript": "^5.1.6",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.15.1"
+    }
 }
