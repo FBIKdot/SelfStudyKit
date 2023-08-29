@@ -153,12 +153,21 @@ let page: Page = {
         changer: new mdui.Tab('#page-pomodoro-timer-page-changer'),
     },
     yiyan: {
-        api: [
-            // 使用 古诗词·一言 api: https://github.com/xenv/gushici
-            '//v1.jinrishici.com/rensheng/lizhi.json',
-            '//v1.jinrishici.com/rensheng/zheli.json',
-            '//v1.jinrishici.com/rensheng/dushu.json', //人生-读书
-        ],
+        get api(): string[] {
+            return [
+                // 使用 古诗词·一言 api: https://github.com/xenv/gushici
+                '//v1.jinrishici.com/rensheng/lizhi.json',
+                '//v1.jinrishici.com/rensheng/zheli.json',
+                '//v1.jinrishici.com/rensheng/dushu.json', //人生-读书
+            ].map((value: string): string => {
+                // 适配 (mini-)electron, 根据协议选择获取方式
+                if (window.location.protocol === 'file:') {
+                    return 'https:' + value;
+                } else {
+                    return window.location.protocol + value;
+                }
+            });
+        },
     },
     settings: {
         panel: new mdui.Panel('#page-settings-panel'),

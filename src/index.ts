@@ -1,5 +1,5 @@
 /*!
- * SelfStudyKit v1.0.0 - 基于mdui的纯前端自习辅助工具集.
+ * SelfStudyKit v1.0.3 - 基于mdui的纯前端自习辅助工具集.
  * https://github.com/BovineBeta/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
  * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE
@@ -25,22 +25,6 @@ const randomInt = (min: number, max: number): number => Math.floor(Math.random()
  */
 // 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
 $('#button-menu').on('click', () => page.drawer.dom.toggle());
-
-/* // 右上角mdui menu主题色更换按钮
-let darkModeState: boolean = window.matchMedia('(prefers-color-scheme:dark)').matches;
-$('#theme-changer').on('click', () => {
-    if ($('body').hasClass('mdui-theme-layout-auto')) $('body').removeClass('mdui-theme-layout-auto');
-    if (darkModeState) {
-        if ($('body').hasClass('mdui-theme-layout-dark')) $('body').removeClass('mdui-theme-layout-dark');
-        $('body').addClass('mdui-theme-layout-light');
-        $('#theme-changer-icon').text('brightness_high');
-    } else {
-        if ($('body').hasClass('mdui-theme-layout-light')) $('body').removeClass('mdui-theme-layout-light');
-        $('body').addClass('mdui-theme-layout-dark');
-        $('#theme-changer-icon').text('brightness_3');
-    }
-    darkModeState = !darkModeState;
-}); */
 
 //* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
 page.name.forEach((element: string, index: number) => {
