@@ -40,7 +40,7 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: './index.html', // 输入文件
+                    from: './src/index.html', // 输入文件
                     to: 'index.html', // 输出文件
                     transform(content, path) {
                         // 使用 html-minifier 插件进行压缩
