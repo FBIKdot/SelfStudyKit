@@ -29,14 +29,15 @@ del desktop\build\mini-electron\resources\app\dist\index.js.gz
 
 copy electron.js desktop\build\mini-electron\resources\app\
 copy desktop\electron\package.json desktop\build\mini-electron\resources\app\
+copy desktop\electron\README.md desktop\build\mini-electron\
 
 cd desktop\build\mini-electron\
 :: 有roboto Font版本
-start /wait 7z a -tzip SelfStudyKit.%1.mini-electron.withFont.zip SelfStudyKit.exe node.dll resources
+start /wait 7z a -tzip SelfStudyKit.%1.mini-electron.withFont.zip SelfStudyKit.exe node.dll README.md resources
 
 :: 无roboto Font版本
 del resources\app\dist\*.woff*
-start /wait 7z a -tzip SelfStudyKit.%1.mini-electron.zip SelfStudyKit.exe node.dll resources
+start /wait 7z a -tzip SelfStudyKit.%1.mini-electron.zip SelfStudyKit.exe node.dll README.md resources
 
 move SelfStudyKit*.zip ..\
 
