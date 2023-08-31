@@ -82,7 +82,11 @@ module.exports = {
             {
                 test: /\.(ts|js)$/i,
                 // use: 'ts-loader', // esbuild-loader 更快, 但是如果有*.d.ts就得完善配置
-                use: 'esbuild-loader',
+                loader: 'esbuild-loader',
+                options: {
+                    // JavaScript version to compile to
+                    target: 'es2015',
+                },
                 exclude: /node_modules/,
             },
             {
