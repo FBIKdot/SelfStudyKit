@@ -12,6 +12,9 @@ import { getCookie, setCookie } from 'typescript-cookie';
 
 let $ = mdui.$;
 
+// 等css加载完再显示 body
+$('body').removeAttr('style');
+
 /**
  * @description 随机生成一定范围的整数
  * @param {Number} min - 最小值, 整数
