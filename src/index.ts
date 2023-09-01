@@ -60,7 +60,8 @@ page.name.forEach((element: string, index: number) => {
  * 页面功能声明区 起
  */
 //* 页面切换 逻辑
-page.changer.show(Number(getCookie('page')));
+page.changer.show(Number(getCookie('page') !== void 0 ? getCookie('page') : 0));
+
 if (getCookie('page') === '2') {
     page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
 }
