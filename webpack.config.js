@@ -1,8 +1,9 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const HtmlMinifierPlugin = require('html-minifier').minify;
 const CompressionPlugin = require('compression-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     mode: 'development',
     // devtool: 'inline-source-map',
@@ -11,7 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         // publicPath: '/dist/',
-        filename: 'index.js',
+        filename: 'index.[hash:8].js',
         // chunkFilename: '[name].js'
     },
     resolve: {
@@ -37,26 +38,11 @@ module.exports = {
         ],
     },
     plugins: [
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: './src/index.html', // 输入文件
-                    to: 'index.html', // 输出文件
-                    transform(content, path) {
-                        // 使用 html-minifier 插件进行压缩
-                        return HtmlMinifierPlugin(content.toString(), {
-                            collapseWhitespace: true,
-                            removeComments: true,
-                            removeRedundantAttributes: true,
-                            removeScriptTypeAttributes: true,
-                            removeStyleLinkTypeAttributes: true,
-                            useShortDoctype: true,
-                            minifyCSS: true,
-                            minifyJS: true,
-                        });
-                    },
-                },
-            ],
+        new HtmlWebpackPlugin({
+            template: './src/index.tpl.html',
+            inject: 'body',
+            minify: true,
+            filename: 'index.html',
         }),
         new CopyWebpackPlugin({
             patterns: [
@@ -68,8 +54,8 @@ module.exports = {
         }),
         new CompressionPlugin({
             filename: '[base].gz',
-            exclude: /index\.html$/,
-            test: /\.js$|\.css$|\.html$/,
+            // exclude: /index\.html$/,
+            test: /\.(js|css|html)/i,
             algorithm: 'gzip',
             compressionOptions: { level: 1 },
             threshold: 8192,
@@ -92,10 +78,6 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(json|html)$/i,
-                type: 'asset/resource',
             },
         ],
     },
