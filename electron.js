@@ -16,7 +16,7 @@ function createWindow() {
     });
     mainWindow.loadURL(path.join('file://', __dirname, 'dist/index.html'));
     // 只有 mini_electron_4975_20230609 以及之后版本才可正常打开Devtools, 直到写这里的时候该版本还没有公开
-    // mainWindow.openDevTools();
+    // mainWindow.webContents.openDevTools();
 }
 app.on('ready', () => createWindow());
 app.on('window-all-closed', () => {
