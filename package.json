@@ -6,8 +6,8 @@
         "build-watch": "npx webpack --watch",
         "build-production": "npx webpack --mode=production",
         "start": "webpack serve",
-        "mini-electron:start": "./SDK/mini_electron/mini_electron.exe .",
-        "electron:start": "electron ./electron.js"
+        "mini-electron": "./SDK/mini_electron/mini_electron.exe .",
+        "electron": "./node_modules/.bin/electron ./electron.js"
     },
     "packageManager": "yarn@1.22.19",
     "repository": {
@@ -28,6 +28,7 @@
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.8.1",
+        "electron": "1.7.16",
         "esbuild-loader": "^3.1.0",
         "html-webpack-plugin": "^5.5.3",
         "style-loader": "^3.3.3",
