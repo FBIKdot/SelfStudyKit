@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     mode: 'development',
     // devtool: 'inline-source-map',
-    entry: ['./src/index.ts', './src/main.js'],
+    entry: ['./src/index.ts'],
     // watch: true,
     output: {
         path: path.join(__dirname, 'dist'),
@@ -16,7 +16,7 @@ module.exports = {
         // chunkFilename: '[name].js'
     },
     resolve: {
-        extensions: ['.ts', '.js', '.json'],
+        extensions: ['.ts', '.js'],
     },
     //* webpack开发服务器. 它不会自动更新html, 所以我更推荐启用watch然后使用Live Server --FBIK.
     devServer: {
