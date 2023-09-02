@@ -6,8 +6,7 @@
         "build-watch": "npx webpack --watch",
         "build-production": "npx webpack --mode=production",
         "start": "webpack serve",
-        "mini-electron": "./SDK/mini_electron/mini_electron.exe .",
-        "electron": "./node_modules/.bin/electron ./electron.js"
+        "mini-electron": "./SDK/mini_electron/mini_electron.exe ."
     },
     "packageManager": "yarn@1.22.19",
     "repository": {
