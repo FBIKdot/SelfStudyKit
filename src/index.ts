@@ -60,12 +60,22 @@ page.name.forEach((element: string, index: number) => {
  * 页面功能声明区 起
  */
 //* 页面切换 逻辑
-page.changer.show(Number(getCookie('page') !== void 0 ? getCookie('page') : 0));
+// 切换页面
+const pageNumber: number = Number(getCookie('page') || 0);
+page.changer.show(pageNumber);
 
+// 切换标题
+$('.mdui-typo-title').text(page.config[page.name[pageNumber]].title);
+
+// 是否启用clock
 if (getCookie('page') === '2') {
     page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
 }
+
+// 页面切换事件监听
 $('#page-changer').on('change.mdui.tab', (event: Event) => {
+    const pageNumber: number = (event as any)._detail.index;
+
     //默认隐藏fab
     page.fab.hide();
     page.fn.clock.stop();
@@ -78,8 +88,11 @@ $('#page-changer').on('change.mdui.tab', (event: Event) => {
             page.fn.clock.start('#page-clock-text', '{年}/{月}/{日} {时}:{分}:{秒} {时辰}');
             break;
     }
-    setCookie('page', (event as any)._detail.index.toString());
-    console.log((event as any)._detail.index.toString());
+    // 切换标题
+    $('.mdui-typo-title').text(page.config[page.name[pageNumber]].title);
+    // 存储页面页码
+    setCookie('page', pageNumber.toString());
+    console.log(pageNumber.toString());
 });
 
 //* 测试区 起
@@ -195,7 +208,7 @@ $('#button-pomodoro-timer-stop').on('click', () => {
 
 //*设置
 // Cookie
-let themeStatus: string = getCookie('theme') || 'auto';
+const themeStatus: string = getCookie('theme') || 'auto';
 page.fn.theme_changer(themeStatus);
 
 $('#page-settings-panel .mdui-panel-item')
@@ -211,7 +224,7 @@ $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
 
 // 应用主题色
 $('#page-settings-theme-apply').on('click', () => {
-    themeStatus = $('input[name="主题色"]:checked').val() as string;
+    const themeStatus = $('input[name="主题色"]:checked').val() as string;
     page.fn.theme_changer(themeStatus);
     $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
 });
