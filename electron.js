@@ -1,5 +1,6 @@
+// @ts-nocheck
 /**
- * ! 注意! 这个主进程为mini-electron所写. 虽然可以正常被electron运行, 但是修改需要支持mini-electron.
+ * ! 注意! 这个主进程为mini-electron所写. 虽然可以正常被electron运行, 但是修改需要支持mini-electron (大概是electron v1.7.x)
  */
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
