@@ -11,14 +11,14 @@
     "packageManager": "yarn@1.22.19",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/BovineBeta/SelfStudyKit.git"
+        "url": "git+https://github.com/FBIKdot/SelfStudyKit.git"
     },
     "author": "FBIK.",
     "license": "GPL-3.0",
     "bugs": {
-        "url": "https://github.com/BovineBeta/SelfStudyKit/issues"
+        "url": "https://github.com/FBIKdot/SelfStudyKit/issues"
     },
-    "homepage": "https://github.com/BovineBeta/SelfStudyKit#readme",
+    "homepage": "https://github.com/FBIKdot/SelfStudyKit#readme",
     "dependencies": {
         "mdui": "^1.0.2",
         "typescript-cookie": "^1.0.6"

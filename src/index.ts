@@ -1,8 +1,8 @@
 /*!
  * SelfStudyKit v1.0.3 - 基于mdui的纯前端自习辅助工具集.
- * https://github.com/BovineBeta/SelfStudyKit
+ * https://github.com/FBIKdot/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
- * https://github.com/BovineBeta/SelfStudyKit/blob/master/LICENSE
+ * https://github.com/FBIKdot/SelfStudyKit/blob/master/LICENSE
  */
 import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';

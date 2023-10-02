@@ -400,7 +400,7 @@ let page: Page = {
                 tag_name: string;
                 prerelease: boolean;
             }
-            const data: GithubApi[] | void = await fetch('//api.github.com/repos/BovineBeta/SelfStudyKit/releases')
+            const data: GithubApi[] | void = await fetch('//api.github.com/repos/FBIKdot/SelfStudyKit/releases')
                 .then(result => result.json())
                 .catch(err => console.warn(err));
             if (data !== void 0) {

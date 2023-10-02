@@ -2,8 +2,8 @@
 
 基于 [MDUI](https://github.com/zdhxiong/mdui) 的纯前端自习辅助工具集.
 
-[![License](https://img.shields.io/github/license/BovineBeta/SelfStudyKit?color=blue)](https://github.com/BovineBeta/SelfStudyKit)
-[![GitHub release](https://img.shields.io/github/v/release/BovineBeta/SelfStudyKit)](https://github.com/BovineBeta/SelfStudyKit/releases)
+[![License](https://img.shields.io/github/license/FBIKdot/SelfStudyKit?color=blue)](https://github.com/FBIKdot/SelfStudyKit)
+[![GitHub release](https://img.shields.io/github/v/release/FBIKdot/SelfStudyKit)](https://github.com/FBIKdot/SelfStudyKit/releases)
 
 每次提交后自动在此构建: <https://SelfStudyKit.fbik.top>
 
@@ -58,7 +58,7 @@ npm install -g yarn
 拉取代码&安装依赖
 
 ```bash
-git clone https://github.com/BovineBeta/SelfStudyKit.git
+git clone https://github.com/FBIKdot/SelfStudyKit.git
 cd SelfStudyKit
 yarn
 ```
