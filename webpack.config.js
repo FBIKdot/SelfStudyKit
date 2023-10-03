@@ -3,6 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const glob = require('glob');
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -51,6 +53,9 @@ module.exports = {
                     to: 'niva.json', // 输出文件
                 },
             ],
+        }),
+        new PurgeCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'src/**/*'), { nodir: true }),
         }),
         new CompressionPlugin({
             filename: '[base].gz',
