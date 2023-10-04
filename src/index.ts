@@ -207,27 +207,7 @@ $('#button-pomodoro-timer-stop').on('click', () => {
 });
 
 //*设置
-// Cookie
-const themeStatus: string = getCookie('theme') || 'auto';
-page.fn.theme_changer(themeStatus);
-
-$('#page-settings-panel .mdui-panel-item')
-    .get()
-    .forEach(element => {
-        $(element).on('click', () => {
-            page.settings.panel.open($(element));
-        });
-    });
-
-// 勾选当前主题色
-$(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
-
-// 应用主题色
-$('#page-settings-theme-apply').on('click', () => {
-    const themeStatus = $('input[name="主题色"]:checked').val() as string;
-    page.fn.theme_changer(themeStatus);
-    $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
-});
+import './page/settings';
 
 // 版本检查
 // page.fn.version_Check();
