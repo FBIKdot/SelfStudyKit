@@ -8,15 +8,11 @@ let $ = mdui.$;
 const themeStatus: string = getCookie('theme') || 'auto';
 themeChanger(themeStatus);
 
-const panel = new mdui.Panel('#page-settings-panel');
-
 // 锁住panel. 因为懒得设计ui
 $('#page-settings-panel .mdui-panel-item')
     .get()
     .forEach(element => {
-        $(element).on('click', () => {
-            panel.open($(element));
-        });
+        $(element).on('click', () => {});
     });
 
 // 勾选当前主题色
