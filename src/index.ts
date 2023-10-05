@@ -15,14 +15,6 @@ let $ = mdui.$;
 // 等css加载完再显示 body
 $('body').removeAttr('style');
 
-/**
- * @description 随机生成一定范围的整数
- * @param {Number} min - 最小值, 整数
- * @param {Number} max - 最大值, 整数
- * @return {Number} 随机生成的整数
- */
-const randomInt = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1) + min);
-
 /*
  * 核心功能 起
  */
@@ -92,7 +84,7 @@ $('#page-changer').on('change.mdui.tab', (event: Event) => {
     $('.mdui-typo-title').text(page.config[page.name[pageNumber]].title);
     // 存储页面页码
     setCookie('page', pageNumber.toString());
-    console.log(pageNumber.toString());
+    console.log('pageNumber.toString()', pageNumber.toString());
 });
 
 //* 测试区 起
@@ -118,19 +110,10 @@ page.fn.fab_change({
 //* 测试区 终
 
 //* 首页 index
-
 // 一言
-console.log('一言api: ', page.yiyan.api[randomInt(0, page.yiyan.api.length - 1)]);
-fetch(page.yiyan.api[randomInt(0, page.yiyan.api.length - 1)])
-    .then(response => response.json())
-    // .then(data => console.log(data))
-    .then(data => $('#yiyan').text(`“ ${data.content}” —— ${data.author} 《${data.origin}》`))
-    .catch(error => {
-        console.error('一言读取出现错误:', error);
-    });
+import './page/yiyan';
 
 //* 欢迎使用 welcome
-
 new mdui.Tooltip('#tooltip-番茄工作法', {
     content: '"番茄工作法"是由 弗朗西斯科·西里洛 于1992年创立的一种相对于GTD(Getting Things Done)更微观的时间管理方法',
 });
@@ -139,72 +122,7 @@ new mdui.Tooltip('#tooltip-番茄工作法', {
 // 在页面切换逻辑里面
 
 //* 番茄钟
-$('#page-pomodoro-timer-options input')
-    .eq(3)
-    .on('click', () => {
-        let checked = $('#page-pomodoro-timer-options input').eq(3).prop('checked');
-        $('#page-pomodoro-timer-options input')
-            .eq(2)
-            .attr('disabled', !checked ? 'true' : null);
-        $('#page-pomodoro-timer-options label')
-            .eq(2)
-            .text(checked ? '长休息时间 (秒)' : '已关闭 长休息时间 (秒)');
-        $('#page-pomodoro-timer-options .mdui-textfield').eq(2).removeClass('mdui-textfield-invalid');
-    });
-$('#button-pomodoro-timer-start').on('click', () => {
-    let hasError: boolean = false;
-    [0, 1, 2].forEach(element => {
-        let warning = $('#page-pomodoro-timer-options .mdui-textfield-error').eq(element);
-        let input = $('#page-pomodoro-timer-options input').eq(element);
-        let textfield = $('#page-pomodoro-timer-options .mdui-textfield').eq(element);
-        let hasLongBreak: boolean = $('#page-pomodoro-timer-options input').eq(3).prop('checked');
-        // 判断是否为正整数
-        if (/^[1-9]|[1-5]\d$/.test(input.val()?.toString() || '') || (element === 2 && !hasLongBreak)) {
-            warning.text('');
-            textfield.removeClass('mdui-textfield-invalid');
-        } else {
-            warning.text('内容必须为不超过60的正整数');
-            hasError = true;
-            textfield.addClass('mdui-textfield-invalid');
-        }
-    });
-
-    if (!hasError) {
-        let input = $('#page-pomodoro-timer-options input');
-        let settings = {
-            pomodoro: Number(input.eq(0).val() as string),
-            short_break: Number(input.eq(1).val() as string),
-            long_break: Number(input.eq(2).val() as string),
-        };
-
-        // 倒计时
-        page.fn.pomodoro_timer.init(
-            '#page-pomodoro-timer-display div',
-            100,
-            settings.pomodoro,
-            settings.short_break,
-            settings.long_break,
-        );
-    }
-});
-$('#button-pomodoro-timer-next').on('click', () =>
-    page.fn.pomodoro_timer.next('#page-pomodoro-timer-display div', 100),
-);
-$('#button-pomodoro-timer-stop').on('click', () => {
-    mdui.dialog({
-        title: '确定?',
-        content: '你确定要结束番茄钟吗?',
-        buttons: [
-            {
-                text: '取消',
-            },
-            {
-                text: '确定',
-                onClick: () => page.fn.pomodoro_timer.stop('#page-pomodoro-timer-display div'),
-            },
-        ],
-    });
-});
+import './page/pomodoro-timer';
 
 //*设置
 import './page/settings';
