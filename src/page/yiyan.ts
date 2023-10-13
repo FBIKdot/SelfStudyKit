@@ -7,7 +7,7 @@ fetch(config.yiyan[randomInt(0, config.yiyan.length - 1)])
     // .then(data => console.log(data))
     .then(data => {
         let dom = document.querySelector('#yiyan') as HTMLElement;
-        dom.innerHTML = `“ ${data.content}” —— ${data.author} 《${data.origin}》`;
+        dom.innerText = `“ ${data.content}” —— ${data.author} 《${data.origin}》`;
     })
     .catch(error => {
         console.error('一言读取出现错误:', error);
