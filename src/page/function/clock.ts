@@ -37,16 +37,15 @@ class Clock {
      * @param {string} style 时间样式字符串, 默认为'{年}/{月}/{日} {时}:{分}:{秒}'
      * @param {number} [delay=100] 间隔时间, 默认为100
      */
-    static start() {
+    public static start() {
         this.instance = window.setInterval(() => {
             $('#page-clock-text').text(this.timeTextDiy(this.style));
         }, this.delay);
     }
     /**
      * @description 停止并删除clock实例
-     * @param {string} target 目标DOM, 使用css选择器, 默认为#page-clock-text
      */
-    static stop(target: string = '#page-clock-text') {
+    public static stop() {
         clearInterval(this.instance);
     }
 }
