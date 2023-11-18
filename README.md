@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/github/license/FBIKdot/SelfStudyKit?color=blue)](https://github.com/FBIKdot/SelfStudyKit)
 [![GitHub release](https://img.shields.io/github/v/release/FBIKdot/SelfStudyKit)](https://github.com/FBIKdot/SelfStudyKit/releases)
 
-每次提交后自动在此构建: <https://SelfStudyKit.fbik.top>
+每次`main`分支的提交将自动部署于此: <https://SelfStudyKit.fbik.top>
 
 # 特点
 
@@ -30,7 +30,9 @@
 
 -   [x] gzipped, 使加载速度增快
 -   [ ] Support PWA
+-   [ ] Use ServiceWorker API
 -   [ ] 番茄钟多项预设置支持
+-   [x] 模块化重构
 -   [x] Refactoring with TypeScript
 
 **Desktop version**
@@ -41,9 +43,11 @@
 
 # 使用
 
-直接访问<https://SelfStudyKit.fbik.top>
+SelfStudyKit 是纯前端应用, 你可以直接使用浏览器打开构建好的`index.html`, 在本地启动一个 Web Server, 或者部署到服务器.
 
-或者前往 Releases 下载 Desktop version
+每次`main`分支的提交将自动部署于此: <https://SelfStudyKit.fbik.top>
+
+如果你有离线使用的需求, 可以前往 Releases 下载 Desktop version 或已经构建好的`dist`打包, 或者使用源代码自己进行生产模式构建.
 
 # Developement
 
@@ -63,23 +67,7 @@ cd SelfStudyKit
 yarn
 ```
 
-## 构建应用
-
-生产模式构建:
-
-```bash
-yarn build-production
-```
-
-构建后的内容将会输出到`/dist`目录下, 可以直接使用浏览器打开`/dist/index.html`离线使用, 或者将`/dist`目录下的文件部署到网页服务器在线使用.
-
 ## 开发
-
-运行 webpack dev server (拥有实时构建, 但是 index.html 的修改不会自动更新):
-
-```bash
-yarn start
-```
 
 开发模式构建:
 
@@ -90,13 +78,17 @@ yarn build
 开发模式实时构建 (如果不想使用 webpack dev server, 可搭配 vscode 扩展 live server 使用):
 
 ```bash
-yarn build-watch
+yarn start # webpack dev server
+
+yarn dev # 监听模式, 不启用webpack dev server
 ```
 
-生产模式构建:
+## 生产模式构建
+
+构建后的内容将会输出到`/dist`目录下, 可以直接使用浏览器打开`/dist/index.html`离线使用, 或者将`/dist`目录下的文件部署到网页服务器在线使用.
 
 ```bash
-yarn build-production
+yarn production
 ```
 
 # License
