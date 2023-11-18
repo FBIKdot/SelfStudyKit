@@ -10,7 +10,7 @@ const config = {
         /* 'word-notepad': { title: '单词本', icon: 'book' }, */
         settings: { title: '设置', icon: 'settings' },
     },
-    get name() {
+    get name(): string[] {
         return Object.keys(this.config);
     },
     drawer: {
