@@ -1,5 +1,5 @@
 /*!
- * SelfStudyKit v1.0.3 - 基于mdui的纯前端自习辅助工具集.
+ * SelfStudyKit v1.1.0 - 基于mdui的纯前端自习辅助工具集.
  * https://github.com/FBIKdot/SelfStudyKit
  * Copyright (C) 2023 FBIK <fbik@fbik.top>
  * https://github.com/FBIKdot/SelfStudyKit/blob/master/LICENSE
