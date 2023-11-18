@@ -7,7 +7,6 @@
 import 'mdui/dist/css/mdui.min.css';
 import mdui from 'mdui';
 import './css/main.css';
-import page from './page';
 import { getCookie, setCookie } from 'typescript-cookie';
 
 import config from './page/function/config';
@@ -20,10 +19,9 @@ let $ = mdui.$;
 $('body').removeAttr('style');
 
 namespace Init {
+    // 启用 mdui drawer 并且绑定左上角按钮
     const drawer = new mdui.Drawer('#drawer');
-
-    // 绑定左上角button按钮打开drawer. 更改属性无法禁用drawer
-    $('#button-menu').on('click', () => page.drawer.dom.toggle());
+    $('#button-menu').on('click', () => drawer.toggle());
 
     //* 生成drawer侧边栏. 使用js调用mdui tab选项卡, 实现页面切换
     config.name.forEach((element: string, index: number) => {
@@ -49,27 +47,26 @@ namespace Init {
 }
 
 //* 页面切换 逻辑
-// 切换页面
-
 namespace pageChanging {
+    const fab = new mdui.Fab('#fab-wrapper');
     // 页面切换事件监听
     $('#page-changer').on('change.mdui.tab', (event: Event) => {
+        // 根据mdui文档, 这里的event._detail绝对存在
         const pageNumber: number = (event as any)._detail.index;
 
         //默认隐藏fab
-        page.fab.hide();
-        page.fn.clock.stop();
-        // 根据mdui文档, 这里的event._detail绝对存在
+        fab.hide();
+        Clock.stop();
+
         switch (pageNumber) {
             case 1:
-                // page.fab.show();
                 break;
             case 2:
                 Clock.start();
                 break;
         }
         // 切换标题
-        $('.mdui-typo-title').text(page.config[page.name[pageNumber]].title);
+        $('.mdui-typo-title').text(config.config[config.name[pageNumber] as keyof typeof config.config].title);
         // 存储页面页码
         setCookie('page', pageNumber.toString());
         console.log('pageNumber.toString()', pageNumber.toString());
@@ -78,28 +75,6 @@ namespace pageChanging {
     const pageNumber: number = Number(getCookie('page') || 0);
     pageChanger(pageNumber);
 }
-
-//* 测试区 起
-// 测试用功能:
-page.fn.fab_change({
-    closeIcon: 'add',
-    openIcon: 'close',
-    dial: [
-        ['backup', 'pink'],
-        ['bookmark', 'red'],
-        ['access_alarms', 'orange'],
-        [
-            'touch_app',
-            'blue',
-            function () {
-                console.log(`it's work!!!`);
-            },
-        ],
-    ],
-});
-// 临时用于切换到默认页面
-
-//* 测试区 终
 
 //* 首页 index
 // 一言
