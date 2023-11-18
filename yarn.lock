@@ -1748,7 +1748,7 @@ mdui.jq@^2.0.1:
     mdn-polyfills "^5.20.0"
     promise-polyfill "^8.2.0"
 
-mdui@^1.0.2:
+mdui@1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/mdui/-/mdui-1.0.2.tgz#c299320cb9f3c582cdc9977883ae1cce70fd61b2"
   integrity sha512-LIaDjVjzyPY8PUjlhCXiE4mOXinh+jv38H/zsrR00/Y9OWzdncPlvir3mzZGuxT4sh9rHOrh06zfsOPoBjIhzA==

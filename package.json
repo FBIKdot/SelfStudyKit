@@ -22,7 +22,7 @@
     },
     "homepage": "https://github.com/FBIKdot/SelfStudyKit#readme",
     "dependencies": {
-        "mdui": "^1.0.2",
+        "mdui": "1.0.2",
         "typescript-cookie": "^1.0.6"
     },
     "devDependencies": {
