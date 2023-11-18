@@ -68,6 +68,12 @@ class PomodoroTimer {
         // page.drawer.dom.close();
         // $('#button-menu').on('click', () => page.drawer.dom.close());
         this.next();
+
+        // 关闭 drawer
+        new mdui.Drawer('#drawer').close();
+        // 禁用左上角按钮
+        $('#button-menu').off('click');
+        $('#button-menu').on('click', () => void mdui.snackbar('番茄钟开始时不可使用 Drawer'));
     }
     /**
      * @description 切换番茄钟实例到下个阶段.
@@ -160,6 +166,10 @@ class PomodoroTimer {
             page.drawer.dom.toggle();
         }); */
         this.changer(0);
+
+        // 启用左上角按钮, 重新绑定 mdui drawer
+        $('#button-menu').off('click');
+        $('#button-menu').on('click', () => new mdui.Drawer('#drawer').toggle());
     }
 }
 
