@@ -5,10 +5,18 @@ import config from './config';
 let $ = mdui.$;
 
 /**
+ * @description 随机生成一定范围的整数
+ * @param {Number} min - 最小值, 整数
+ * @param {Number} max - 最大值, 整数
+ * @return {Number} 随机生成的整数
+ */
+const randomInt = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1) + min);
+
+/**
  * @description 更改主题色
  * @param {string} status 主题色
  */
-function themeChanger(status: string): void {
+function themeChanger(status: 'auto' | 'light' | 'dark'): void {
     setCookie('theme', status);
     $('body').removeClass('mdui-theme-layout-auto mdui-theme-layout-light mdui-theme-layout-dark');
     $('body').addClass(`mdui-theme-layout-${status}`);
@@ -72,4 +80,4 @@ function pageChanger(name: string | number) {
     }
 }
 
-export { themeChanger, fabChange, versionCheck, pageChanger };
+export { themeChanger, fabChange, versionCheck, pageChanger, randomInt };
