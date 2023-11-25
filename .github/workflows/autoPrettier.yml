@@ -35,13 +35,15 @@ jobs:
             - name: IsChange
               run: |
                   echo ${{ steps.git-diff.outputs.changed }}
-
+            - name: change core.autocrlf to input
+              run: git config --global core.autocrlf input
             - name: Create Pull Request
               if: steps.git-diff.outputs.changed == 'true'
               uses: peter-evans/create-pull-request@v3
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: '[auto]style: format via prettier'
+                  author: GitHub <noreply@github.com>
                   branch: github-action/format-prettier
                   delete-branch: true
                   title: '[auto]style: format via prettier'
