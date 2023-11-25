@@ -5,11 +5,13 @@ import { themeChanger } from './function/main';
 let $ = mdui.$;
 
 // 锁住panel. 因为懒得设计ui
-$('#page-settings-panel .mdui-panel-item')
+$('.mdui-panel-item')
     .get()
     .forEach(element => {
-        $(element).on('click', () => {});
+        $(element).on('closed.mdui.panel', () => new mdui.Panel('#page-settings-panel').open(element));
     });
+
+console.log($('.mdui-panel-item').get());
 
 // 尝试从cookit获取主题信息
 const themeStatus: 'auto' | 'light' | 'dark' = ['auto', 'light', 'dark'].includes(String(getCookie('theme')))
