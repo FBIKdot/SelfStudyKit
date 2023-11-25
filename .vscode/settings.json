@@ -29,7 +29,7 @@
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "package.json": "package-lock.json,yarn.lock,.gitignore,.prettierignore,.prettierrc.js,LICENSE,tsconfig.json"
+        "package.json": "package-lock.json,pnpm-lock.yaml,.gitignore,.prettierignore,.prettierrc.cjs,LICENSE,tsconfig.json"
     },
     "files.exclude": {
         ".idea": true
