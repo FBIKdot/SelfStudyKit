@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Prettier Auto-format
 
 # This action works with pull requests and pushes
 on:
@@ -13,14 +13,44 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout
-              uses: actions/checkout@v3
-              with:
-                  # Make sure the actual branch is checked out when running on pull requests
-                  ref: ${{ github.head_ref }}
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-            - name: Prettify code
-              uses: creyD/prettier_action@v4.3
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
               with:
-                  commit_message: '[auto]style: format via prettier.'
-                  prettier_options: --write .
+                  node-version: '14'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run Prettier
+              run: npx prettier --write .
+
+            - name: Check for changes
+              id: git-diff
+              run: |
+                  git diff --quiet
+                  if [ $? -eq 1 ]; then
+                    echo "changed=true" >> $GITHUB_OUTPUT
+                  else
+                    echo "changed=false" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Configure Git
+              if: steps.git-diff.outputs.changed == 'true'
+              run: |
+                  git config --global user.name 'GitHub Action'
+                  git config --global user.email 'action@github.com'
+
+            - name: Commit changes
+              if: steps.git-diff.outputs.changed == 'true'
+              run: |
+                  git add .
+                  git commit -m '[auto]style: format via prettier'
+
+            - name: Push changes
+              if: steps.git-diff.outputs.changed == 'true'
+              uses: ad-m/github-push-action@master
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
