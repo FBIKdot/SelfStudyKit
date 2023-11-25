@@ -4,3 +4,4 @@ node_modules
 .github
 desktop/build/*
 SDK
+pnpm-lock.yaml
