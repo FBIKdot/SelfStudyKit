@@ -36,20 +36,13 @@ jobs:
               run: |
                   echo ${{ steps.git-diff.outputs.changed }}
 
-            - name: Configure Git
+            - name: Create Pull Request
               if: steps.git-diff.outputs.changed == 'true'
-              run: |
-                  git config --global user.name 'GitHub Action'
-                  git config --global user.email 'action@github.com'
-
-            - name: Commit changes
-              if: steps.git-diff.outputs.changed == 'true'
-              run: |
-                  git add .
-                  git commit -m '[auto]style: format via prettier'
-
-            - name: Push changes
-              if: steps.git-diff.outputs.changed == 'true'
-              uses: ad-m/github-push-action@master
+              uses: peter-evans/create-pull-request@v3
               with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  commit-message: '[auto]style: format via prettier'
+                  branch: github-action/format-prettier
+                  delete-branch: true
+                  title: '[auto]style: format via prettier'
+                  reviewers: FBIKdot
