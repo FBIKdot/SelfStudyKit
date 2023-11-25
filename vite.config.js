@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig(({ command, mode }) => {
-    return {server: {
+    return {
+        server: {
             port: 5500,
             strictPort: true,
         },
