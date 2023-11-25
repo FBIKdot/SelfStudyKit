@@ -32,6 +32,10 @@ jobs:
               run: |
                   git diff --quiet || echo "changed=true" >> $GITHUB_ENV
 
+            - name: IsChange
+              run: |
+                  echo ${{ steps.git-diff.outputs.changed }}
+
             - name: Configure Git
               if: steps.git-diff.outputs.changed == 'true'
               run: |
