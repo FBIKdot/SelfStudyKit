@@ -10,7 +10,7 @@ import './css/main.css';
 import { getCookie, setCookie } from 'typescript-cookie';
 
 import config from './page/function/config';
-import { pageChanger, themeChanger } from './page/function/main';
+import { pageChanger } from './page/function/main';
 import { Clock } from './page/function/clock';
 
 let $ = mdui.$;
@@ -44,8 +44,10 @@ namespace Init {
             }
         });
     });
-}
 
+    export const done = () => {};
+}
+Init.done();
 //* 页面切换 逻辑
 namespace pageChanging {
     const fab = new mdui.Fab('#fab-wrapper');
@@ -74,7 +76,10 @@ namespace pageChanging {
 
     const pageNumber: number = Number(getCookie('page') || 0);
     pageChanger(pageNumber);
+
+    export const done = () => {};
 }
+pageChanging.done();
 
 //* 首页 index
 // 一言
