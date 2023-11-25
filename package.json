@@ -1,16 +1,19 @@
 {
     "name": "selfstudykit",
     "description": "基于 MDUI 的纯前端自习辅助工具集",
+    "type": "module",
     "scripts": {
-        "build": "npx webpack",
-        "dev": "npx webpack --watch",
-        "production": "npx webpack --mode=production",
-        "build-watch": "npx webpack --watch",
-        "build-production": "npx webpack --mode=production",
-        "start": "webpack serve",
-        "mini-electron": "./SDK/mini_electron/mini_electron.exe ."
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "build-production": "vite build",
+        "wp:dev": "npx webpack --watch",
+        "wp:serve": "npx webpack serve",
+        "wp:build": "npx webpack --mode=production",
+        "me:build": "npx webpack --mode=production && .\\SDK\\mini_electron\\mini_electron.exe electron.js",
+        "me:preview": ".\\SDK\\mini_electron\\mini_electron.exe electron.js"
     },
-    "packageManager": "yarn@1.22.19",
+    "packageManager": "pnpm@8.10.5",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/FBIKdot/SelfStudyKit.git"
@@ -26,6 +29,11 @@
         "typescript-cookie": "^1.0.6"
     },
     "devDependencies": {
+        "typescript": "^5.1.6",
+        "vite": "^5.0.0",
+        "vite-plugin-html": "^3.2.0"
+    },
+    "optionalDependencies": {
         "compression-webpack-plugin": "^10.0.0",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.8.1",
@@ -35,9 +43,9 @@
         "style-loader": "^3.3.3",
         "terser-webpack-plugin": "^5.3.9",
         "ts-loader": "^9.4.4",
-        "typescript": "^5.1.6",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
         "webpack-dev-server": "^4.15.1"
     }
 }
+
