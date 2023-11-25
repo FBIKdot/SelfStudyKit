@@ -24,6 +24,9 @@ jobs:
             - name: Install dependencies
               run: npm install -g prettier
 
+            - name: change core.autocrlf to input
+              run: git config --global core.autocrlf input
+
             - name: Run Prettier
               run: prettier --write .
 
@@ -35,8 +38,7 @@ jobs:
             - name: IsChange
               run: |
                   echo ${{ steps.git-diff.outputs.changed }}
-            - name: change core.autocrlf to input
-              run: git config --global core.autocrlf input
+            
             - name: Create Pull Request
               if: steps.git-diff.outputs.changed == 'true'
               uses: peter-evans/create-pull-request@v3
