@@ -4,3 +4,4 @@ node_modules
 desktop/build/*
 SDK
 pnpm-lock.yaml
+.github/workflows/**/*
