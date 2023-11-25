@@ -30,7 +30,7 @@ jobs:
             - name: Check for changes
               id: git-diff
               run: |
-                  git diff --quiet || echo "changed=true" >> $GITHUB_ENV
+                  git diff --quiet || echo "changed=true" >> $GITHUB_OUTPUT
 
             - name: IsChange
               run: |
