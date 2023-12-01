@@ -28,3 +28,6 @@ $('#page-settings-theme-apply').on('click', () => {
     themeChanger(themeStatus);
     $(`input[name="主题色"][value="${themeStatus}"]`).prop('checked', true);
 });
+
+// 版本号
+$('#version').text(__APP_VERSION__);

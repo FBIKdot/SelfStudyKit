@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import fs from 'node:fs';
 
 export default defineConfig(({ command, mode }) => {
+    const version = mode === 'production' ? JSON.parse(fs.readFileSync('./package.json', 'utf8'))['version'] : 'v1.x';
     return {
         server: {
             port: 5500,
@@ -20,5 +22,8 @@ export default defineConfig(({ command, mode }) => {
                 template: 'index.html',
             }),
         ],
+        define: {
+            __APP_VERSION__: JSON.stringify(version),
+        },
     };
 });

@@ -5,6 +5,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     mode: 'development',
@@ -40,6 +41,14 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            // 全局常量
+            __APP_VERSION__: JSON.stringify(
+                process.env.NODE_ENV === 'production'
+                    ? JSON.parse(fs.readFileSync('./package.json', 'utf8'))['version']
+                    : 'v1.x',
+            ),
+        }),
         new HtmlWebpackPlugin({
             template: './index.html',
             inject: 'body',
