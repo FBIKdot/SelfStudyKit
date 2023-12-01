@@ -22,7 +22,7 @@ jobs:
                   node-version: '18'
 
             - name: Install dependencies
-              run: npm install -g prettier
+              run: npm install -g prettier@2.8.8
 
             - name: change core.autocrlf to input
               run: git config --global core.autocrlf input
