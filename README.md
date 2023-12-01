@@ -53,10 +53,10 @@ SelfStudyKit 是纯前端应用, 你可以直接使用浏览器打开构建好�
 
 ## 准备
 
-本项目使用`yarn`进行包管理, 请确保安装好了`yarn`.
+本项目使用`pnpm`进行包管理, 请确保安装好了`pnpm`.
 
 ```bash
-npm install -g yarn
+npm install -g pnpm
 ```
 
 拉取代码&安装依赖
@@ -64,23 +64,15 @@ npm install -g yarn
 ```bash
 git clone https://github.com/FBIKdot/SelfStudyKit.git
 cd SelfStudyKit
-yarn
+pnpm install --no-optional # 不安装可选依赖 (Webpack相关)
 ```
 
 ## 开发
 
-开发模式构建:
+开发模式
 
 ```bash
-yarn build
-```
-
-开发模式实时构建 (如果不想使用 webpack dev server, 可搭配 vscode 扩展 live server 使用):
-
-```bash
-yarn start # webpack dev server
-
-yarn dev # 监听模式, 不启用webpack dev server
+pnpm dev
 ```
 
 ## 生产模式构建
@@ -88,8 +80,25 @@ yarn dev # 监听模式, 不启用webpack dev server
 构建后的内容将会输出到`/dist`目录下, 可以直接使用浏览器打开`/dist/index.html`离线使用, 或者将`/dist`目录下的文件部署到网页服务器在线使用.
 
 ```bash
-yarn production
+pnpm build
+pnpm preview
 ```
+
+## 使用`webpack`进行开发与打包
+
+目前没成功通过配置 vite 解决打包出的文件无法被`mini-electron`打开的问题. 为了打包出的网页支持`mini-electron`, 在更换打包工具为`vite`后保留了`webpack`配置
+
+要想使用 webpack 进行开发与打包, 需要安装可选依赖:
+
+```bash
+pnpm install
+```
+
+相关`scripts`请查看`package.json`.
+
+## 进行桌面版本开发
+
+待补充
 
 # License
 
