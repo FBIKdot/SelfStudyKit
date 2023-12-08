@@ -49,20 +49,33 @@ function fabChange(opts: { closeIcon: string; openIcon: string; dial: [string?, 
     });
 }
 
-async function versionCheck() {
-    interface GithubApi {
-        tag_name: string;
-        prerelease: boolean;
+/**
+ * @description 版本检查
+ * @return {*}  {Promise<{ isLast: boolean; lastVersion: string }>} 检查结果
+ */
+async function versionCheck(): Promise<{ isLast: boolean; lastVersion: string }> {
+    interface GithubRawAPI {
+        version: string;
     }
-    const data: GithubApi[] | void = await fetch('//api.github.com/repos/FBIKdot/SelfStudyKit/releases')
-        .then(result => result.json())
-        .catch(err => console.warn(err));
-    if (data !== void 0) {
-        let lastVersion;
-        data.forEach((value: GithubApi, index: number) => {
-            if (value['prerelease'] === false) {
-            }
-        });
+    if (__APP_VERSION__ === 'v1.x') {
+        return {
+            isLast: true,
+            lastVersion: __APP_VERSION__,
+        };
+    } else {
+        const data: GithubRawAPI = await fetch(
+            'https://raw.githubusercontent.com/FBIKdot/SelfStudyKit/main/package.json',
+        )
+            .then(result => result.json())
+            .catch(err => {
+                throw new Error(err);
+            });
+        const lastVersion: string = data.version;
+
+        return {
+            isLast: __APP_VERSION__ === lastVersion,
+            lastVersion,
+        };
     }
 }
 
