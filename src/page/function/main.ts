@@ -55,9 +55,10 @@ function fabChange(opts: { closeIcon: string; openIcon: string; dial: [string?, 
  */
 async function versionCheck(): Promise<{ isLast: boolean; lastVersion: string }> {
     interface GithubRawAPI {
-        version: string;
+        version?: string;
     }
     if (__APP_VERSION__ === 'v1.x') {
+        // 开发模式
         return {
             isLast: true,
             lastVersion: __APP_VERSION__,
@@ -65,17 +66,21 @@ async function versionCheck(): Promise<{ isLast: boolean; lastVersion: string }>
     } else {
         const data: GithubRawAPI = await fetch(
             'https://raw.githubusercontent.com/FBIKdot/SelfStudyKit/main/package.json',
+            { cache: 'no-cache' },
         )
-            .then(result => result.json())
+            .then(response => response.json())
             .catch(err => {
                 throw new Error(err);
             });
-        const lastVersion: string = data.version;
-
-        return {
-            isLast: __APP_VERSION__ === lastVersion,
-            lastVersion,
-        };
+        const lastVersion: string | void = data.version;
+        if (lastVersion === void 0) {
+            throw new Error('请求结果为空');
+        } else {
+            return {
+                isLast: __APP_VERSION__ === lastVersion,
+                lastVersion,
+            };
+        }
     }
 }
 
