@@ -25,4 +25,5 @@ export default defineConfig(({ mode }) => {
         define: {
             __APP_VERSION__: JSON.stringify(version),
         },
-    };});
+    };
+});
