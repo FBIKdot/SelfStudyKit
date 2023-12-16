@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import fs from 'node:fs';
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
     const version = mode === 'production' ? JSON.parse(fs.readFileSync('./package.json', 'utf8'))['version'] : 'v1.x';
     return {
         server: {
@@ -25,5 +25,4 @@ export default defineConfig(({ command, mode }) => {
         define: {
             __APP_VERSION__: JSON.stringify(version),
         },
-    };
-});
+    };});
