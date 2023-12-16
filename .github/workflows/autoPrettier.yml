@@ -45,7 +45,7 @@ jobs:
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
                   commit-message: '[auto]style: format via prettier'
-                  author: GitHub <noreply@github.com>
+                  author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
                   branch: github-action/format-prettier
                   delete-branch: true
                   title: '[auto]style: format via prettier'
