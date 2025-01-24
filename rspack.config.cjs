@@ -1,11 +1,12 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const glob = require('glob');
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin');
-const webpack = require('webpack');
+const rspack = require('@rspack/core');
+const CopyRspackPlugin = rspack.CopyRspackPlugin;
+const fs = require('fs');
 
 module.exports = {
     mode: 'development',
@@ -41,7 +42,7 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({
+        new rspack.DefinePlugin({
             // 全局常量
             __APP_VERSION__: JSON.stringify(
                 process.env.NODE_ENV === 'production'
@@ -55,7 +56,7 @@ module.exports = {
             minify: true,
             filename: 'index.html',
         }),
-        new CopyWebpackPlugin({
+        new CopyRspackPlugin({
             patterns: [
                 {
                     from: './desktop/niva/niva.json', // 输入文件
@@ -82,7 +83,7 @@ module.exports = {
             {
                 test: /\.(ts|js)$/i,
                 // use: 'ts-loader', // esbuild-loader 更快, 但是如果有*.d.ts就得完善配置
-                loader: 'esbuild-loader',
+                loader: 'builtin:swc-loader',
                 options: {
                     // JavaScript version to compile to
                     target: 'es2015',
