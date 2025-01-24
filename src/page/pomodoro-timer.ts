@@ -14,7 +14,7 @@ $('#page-pomodoro-timer-options input')
             .attr('disabled', !checked ? 'true' : null);
         $('#page-pomodoro-timer-options label')
             .eq(2)
-            .text(checked ? '长休息时间 (秒)' : '已关闭 长休息时间 (秒)');
+            .text(checked ? '长休息时间 (分钟)' : '已关闭 长休息时间 (分钟)');
         $('#page-pomodoro-timer-options .mdui-textfield').eq(2).removeClass('mdui-textfield-invalid');
     });
 $('#button-pomodoro-timer-start').on('click', () => {
@@ -63,3 +63,4 @@ $('#button-pomodoro-timer-stop').on('click', () => {
         ],
     });
 });
+
