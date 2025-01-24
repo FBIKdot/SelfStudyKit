@@ -63,4 +63,3 @@ $('#button-pomodoro-timer-stop').on('click', () => {
         ],
     });
 });
-
